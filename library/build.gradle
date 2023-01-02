@@ -6,8 +6,8 @@ android {
     resourcePrefix "materialcolorpicker__"
 
     defaultConfig {
-        versionCode 10003002
-        versionName "1.3.4"
+        versionCode 10003006
+        versionName "1.3.6"
         minSdkVersion 21
         targetSdkVersion 33
     }
@@ -31,5 +31,43 @@ allprojects {
         mavenCentral()
         maven { url 'https://maven.google.com' }
         maven { url 'https://jitpack.io' }
+    }
+}
+
+publishing {
+    publications {
+        customLibrary(MavenPublication) {
+            groupId = 'com.github.evilbunny2008'
+            artifactId = 'gradle-maven-converter'
+            version = '1.3.6'
+
+            //from components.java
+
+            pom {
+                name = 'Color Picker Library'
+                description = 'Color Picker library'
+                url = 'https://github.com/evilbunny2008/android-material-color-picker-dialog/'
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://github.com/evilbunny2008/android-material-color-picker-dialog/blob/master/LICENSE'
+                    }
+                }
+            }
+
+            pom.withXml {
+                asNode()
+                        .dependencies
+                        .dependency
+                        .findAll { dependency ->
+                            // find all dependencies with runtime scope
+                            dependency.scope.text() == 'runtime'
+                        }
+                        .each { dependency ->
+                            // set the scope to 'compile'
+                            dependency.scope*.value = 'compile'
+                        }
+            }
+        }
     }
 }
