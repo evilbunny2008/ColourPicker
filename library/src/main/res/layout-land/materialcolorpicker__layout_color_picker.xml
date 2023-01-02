@@ -104,7 +104,8 @@
             android:textColor="@android:color/primary_text_light"
             android:textColorHint="@android:color/primary_text_light"
             android:textSize="18sp"
-            tools:text="123456"/>
+            tools:text="123456"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/okColorButton"
@@ -115,7 +116,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:clickable="true"
-            android:text="@string/materialcolorpicker__btnSelectColor"/>
+            android:text="@string/materialcolorpicker__btnSelectColor"
+            android:focusable="true"
+            tools:ignore="RelativeOverlap" />
 
     </RelativeLayout>
 

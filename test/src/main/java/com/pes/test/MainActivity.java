@@ -3,13 +3,14 @@ package com.pes.test;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
+
+import androidx.annotation.ColorInt;
 
 public class MainActivity extends Activity implements ColorPickerCallback {
 

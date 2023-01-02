@@ -6,8 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.IntRange;
 import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 
 import static com.pes.androidmaterialcolorpickerdialog.ColorFormatHelper.assertColorValueInRange;
 import static com.pes.androidmaterialcolorpickerdialog.ColorFormatHelper.formatColorValues;
@@ -181,26 +182,29 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
 
         hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(withAlpha ? 8 : 6)});
 
-        hexCode.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-                                actionId == EditorInfo.IME_ACTION_DONE ||
-                                event.getAction() == KeyEvent.ACTION_DOWN &&
-                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-                            updateColorView(v.getText().toString());
-                            InputMethodManager imm = (InputMethodManager) activity
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
+	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE)
+	    {
+		    hexCode.setOnEditorActionListener(
+		            new EditText.OnEditorActionListener() {
+		                @Override
+		                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+		                    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+		                            actionId == EditorInfo.IME_ACTION_DONE ||
+		                            event.getAction() == KeyEvent.ACTION_DOWN &&
+		                                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+		                        updateColorView(v.getText().toString());
+		                        InputMethodManager imm = (InputMethodManager) activity
+		                                .getSystemService(Context.INPUT_METHOD_SERVICE);
+		                        imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
 
-                            return true;
-                        }
-                        return false;
-                    }
-                });
+		                        return true;
+		                    }
+		                    return false;
+		                }
+		            });
+	    }
 
-        final Button okColor = (Button) findViewById(R.id.okColorButton);
+	    final Button okColor = (Button) findViewById(R.id.okColorButton);
         okColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
