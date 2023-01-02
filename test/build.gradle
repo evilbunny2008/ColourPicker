@@ -1,14 +1,23 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/home/duane/workspace/mykeystore')
+            storePassword 'password'
+            keyPassword 'password'
+            keyAlias 'alias'
+        }
+    }
     compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.github.evilbunny2008.test"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
