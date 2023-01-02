@@ -38,10 +38,10 @@ publishing {
     publications {
         customLibrary(MavenPublication) {
             groupId = 'com.github.evilbunny2008'
-            artifactId = 'gradle-maven-converter'
+            artifactId = 'android-material-color-picker-dialog'
             version = '1.3.6'
 
-            //from components.java
+//            from components.java
 
             pom {
                 name = 'Color Picker Library'
