@@ -32,14 +32,14 @@ dependency in your `build.gradle`.
 (root)
 ```groovy
     repositories {
-        jcenter()
+        maven { url "https://jitpack.io" }
     }
 ```
     
 (module)
 ```groovy    
     dependencies {
-        compile 'com.github.evilbunny2008.materialcolorpicker:library:1.2.5'
+        implementation 'com.github.evilbunny2008:android-material-color-picker-dialog:1.3.7'
     }
 ```
 
