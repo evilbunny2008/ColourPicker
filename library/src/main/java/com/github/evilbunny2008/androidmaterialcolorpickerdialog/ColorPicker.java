@@ -1,4 +1,4 @@
-package com.pes.androidmaterialcolorpickerdialog;
+package com.github.evilbunny2008.androidmaterialcolorpickerdialog;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,8 +20,8 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 
-import static com.pes.androidmaterialcolorpickerdialog.ColorFormatHelper.assertColorValueInRange;
-import static com.pes.androidmaterialcolorpickerdialog.ColorFormatHelper.formatColorValues;
+import static com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorFormatHelper.assertColorValueInRange;
+import static com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorFormatHelper.formatColorValues;
 
 /**
  * This is the only class of the project. It consists in a custom dialog that shows the GUI

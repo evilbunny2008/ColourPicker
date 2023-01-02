@@ -1,4 +1,4 @@
-package com.pes.androidmaterialcolorpickerdialog;
+package com.github.evilbunny2008.androidmaterialcolorpickerdialog;
 
 import androidx.annotation.IntRange;
 

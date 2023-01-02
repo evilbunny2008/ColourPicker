@@ -4,11 +4,11 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "com.pes.test"
+        applicationId "com.github.evilbunny2008.test"
         minSdkVersion 19
         targetSdkVersion 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -16,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    namespace 'com.pes.test'
+    namespace 'com.github.evilbunny2008.test'
 }
 
 dependencies {

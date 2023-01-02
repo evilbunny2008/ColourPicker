@@ -4,11 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/android-material-color-picker-dialog.iml" filepath="$PROJECT_DIR$/android-material-color-picker-dialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.main.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/android-material-color-picker-dialog.library.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.iml" filepath="$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.main.iml" filepath="$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/test/android-material-color-picker-dialog.test.unitTest.iml" />
     </modules>

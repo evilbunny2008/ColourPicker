@@ -1,18 +1,19 @@
-package com.pes.test;
+package com.github.evilbunny2008.test;
 
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
+import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPickerCallback;
+import com.github.evilbunny2008.androidmaterialcolorpickerdialog.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
-import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
+import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPicker;
 
 import androidx.annotation.ColorInt;
 
-public class MainActivity extends Activity implements ColorPickerCallback {
+public class MainActivity extends Activity implements ColorPickerCallback
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,8 @@ public class MainActivity extends Activity implements ColorPickerCallback {
 
         setContentView(R.layout.activity_main);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                colorPicker.show();
-            }
-        });
+        final FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> colorPicker.show());
 
         colorPicker.enableAutoClose();
 

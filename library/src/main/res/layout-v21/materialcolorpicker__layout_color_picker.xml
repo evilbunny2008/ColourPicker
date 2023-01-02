@@ -22,7 +22,7 @@
         android:paddingRight="@dimen/materialcolorpicker__activity_horizontal_margin"
         android:paddingTop="@dimen/materialcolorpicker__activity_vertical_margin">
 
-        <com.pes.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
+        <com.github.evilbunny2008.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
             android:id="@+id/alphaSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:textColor="@android:color/black"
             android:thumbTint="@android:color/black"/>
 
-        <com.pes.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
+        <com.github.evilbunny2008.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
             android:id="@+id/redSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:textColor="@android:color/holo_red_light"
             android:thumbTint="@android:color/holo_red_light"/>
 
-        <com.pes.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
+        <com.github.evilbunny2008.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
             android:id="@+id/greenSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:textColor="@android:color/holo_green_light"
             android:thumbTint="@android:color/holo_green_light"/>
 
-        <com.pes.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
+        <com.github.evilbunny2008.androidmaterialcolorpickerdialog.MaterialColorPickerTextSeekBar
             android:id="@+id/blueSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

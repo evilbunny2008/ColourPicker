@@ -1,4 +1,4 @@
-package com.pes.androidmaterialcolorpickerdialog;
+package com.github.evilbunny2008.androidmaterialcolorpickerdialog;
 
 import android.content.Context;
 import android.content.res.TypedArray;

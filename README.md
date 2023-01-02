@@ -39,7 +39,7 @@ dependency in your `build.gradle`.
 (module)
 ```groovy    
     dependencies {
-        compile 'com.pes.materialcolorpicker:library:1.2.5'
+        compile 'com.github.evilbunny2008.materialcolorpicker:library:1.2.5'
     }
 ```
 
@@ -47,7 +47,7 @@ dependency in your `build.gradle`.
 
 Import the class
 ```java
-    import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
+    import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPicker;
 ```
 
 Create a color picker dialog object
