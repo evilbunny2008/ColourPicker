@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPickerCallback;
-import com.github.evilbunny2008.androidmaterialcolorpickerdialog.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPicker;
 
