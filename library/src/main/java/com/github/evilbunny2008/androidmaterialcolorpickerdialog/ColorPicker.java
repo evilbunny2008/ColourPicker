@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -164,6 +165,11 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     {
 		super.onCreate(savedInstanceState);
 
+	    for (java.lang.reflect.Method m : ColorPicker.class.getMethods())
+	    {
+		    Log.d("CP_METHOD", m.getName());
+	    }
+
 	    setContentView(R.layout.materialcolorpicker__layout_color_picker);
 
         colorView = findViewById(R.id.colorView);
@@ -180,9 +186,9 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         greenSeekBar.setOnSeekBarChangeListener(this);
         blueSeekBar.setOnSeekBarChangeListener(this);
 
-        hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(withAlpha ? 8 : 6)});
+		hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(withAlpha ? 8 : 6)});
 
-	    hexCode.setOnEditorActionListener((v, actionId, event) ->
+		hexCode.setOnEditorActionListener((v, actionId, event) ->
 	    {
 		    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
 				    actionId == EditorInfo.IME_ACTION_DONE ||

@@ -25,6 +25,16 @@ android {
 			shrinkResources = false
 		}
 	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_21
+		targetCompatibility JavaVersion.VERSION_21
+	}
+
+	tasks.withType(JavaCompile).configureEach {
+		options.compilerArgs += ['-Xlint:deprecation']
+	}
+
     namespace = 'com.github.evilbunny2008.androidmaterialcolorpickerdialog'
 }
 
@@ -35,9 +45,9 @@ dependencies {
 
 allprojects {
     repositories {
-        mavenLocal()
+	    maven { url = 'https://jitpack.io' }
+	    maven { url = 'https://maven.google.com' }
         mavenCentral()
-        maven { url = 'https://maven.google.com' }
-        maven { url = 'https://jitpack.io' }
+	    google()
     }
 }
