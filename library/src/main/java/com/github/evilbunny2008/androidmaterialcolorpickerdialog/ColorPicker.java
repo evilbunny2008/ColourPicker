@@ -4,18 +4,15 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
@@ -29,6 +26,7 @@ import static com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorFor
  *
  * @author Simone Pessotto
  */
+@SuppressWarnings("unused")
 public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListener {
 
     private final Activity activity;
@@ -72,7 +70,7 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      * @param red      Red color for RGB values (0 - 255)
      * @param green    Green color for RGB values (0 - 255)
      * @param blue     Blue color for RGB values (0 - 255)
-     *
+     * <p>
      *                 If the value of the colors it's not in the right range (0 - 255) it will
      *                 be place at 0.
      */
@@ -113,7 +111,7 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      * @param red      Red color for RGB values (0 - 255)
      * @param green    Green color for RGB values (0 - 255)
      * @param blue     Blue color for RGB values (0 - 255)
-     *
+     * <p>
      *                 If the value of the colors it's not in the right range (0 - 255) it will
      *                 be place at 0.
      * @since v1.1.0
@@ -160,20 +158,16 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
-
-        setContentView(R.layout.materialcolorpicker__layout_color_picker);
+	    setContentView(R.layout.materialcolorpicker__layout_color_picker);
 
         colorView = findViewById(R.id.colorView);
 
-        hexCode = (EditText) findViewById(R.id.hexCode);
+        hexCode = findViewById(R.id.hexCode);
 
-        alphaSeekBar = (SeekBar) findViewById(R.id.alphaSeekBar);
-        redSeekBar = (SeekBar) findViewById(R.id.redSeekBar);
-        greenSeekBar = (SeekBar) findViewById(R.id.greenSeekBar);
-        blueSeekBar = (SeekBar) findViewById(R.id.blueSeekBar);
+        alphaSeekBar = findViewById(R.id.alphaSeekBar);
+        redSeekBar = findViewById(R.id.redSeekBar);
+        greenSeekBar = findViewById(R.id.greenSeekBar);
+        blueSeekBar = findViewById(R.id.blueSeekBar);
 
         alphaSeekBar.setOnSeekBarChangeListener(this);
         redSeekBar.setOnSeekBarChangeListener(this);
@@ -182,35 +176,26 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
 
         hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(withAlpha ? 8 : 6)});
 
-	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CUPCAKE)
-	    {
-		    hexCode.setOnEditorActionListener(
-		            new EditText.OnEditorActionListener() {
-		                @Override
-		                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-		                    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-		                            actionId == EditorInfo.IME_ACTION_DONE ||
-		                            event.getAction() == KeyEvent.ACTION_DOWN &&
-		                                    event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-		                        updateColorView(v.getText().toString());
-		                        InputMethodManager imm = (InputMethodManager) activity
-		                                .getSystemService(Context.INPUT_METHOD_SERVICE);
-		                        imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
+	    hexCode.setOnEditorActionListener(
+			    (v, actionId, event) ->
+			    {
+				    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+						    actionId == EditorInfo.IME_ACTION_DONE ||
+						    event.getAction() == KeyEvent.ACTION_DOWN &&
+								    event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+				    {
+					    updateColorView(v.getText().toString());
+					    InputMethodManager imm = (InputMethodManager) activity
+							    .getSystemService(Context.INPUT_METHOD_SERVICE);
+					    imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
 
-		                        return true;
-		                    }
-		                    return false;
-		                }
-		            });
-	    }
+					    return true;
+				    }
+				    return false;
+			    });
 
-	    final Button okColor = (Button) findViewById(R.id.okColorButton);
-        okColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendColor();
-            }
-        });
+	    final Button okColor = findViewById(R.id.okColorButton);
+        okColor.setOnClickListener(view -> sendColor());
     }
 
     private void initUi() {
@@ -393,7 +378,7 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
 
     /**
      * Getter for the color as Android Color class value.
-     *
+     * <p>
      * From Android Reference: The Color class defines methods for creating and converting color
      * ints.
      * Colors are represented as packed ints, made up of 4 bytes: alpha, red, green, blue.

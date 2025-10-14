@@ -49,38 +49,34 @@ class MaterialColorPickerTextSeekBar extends AppCompatSeekBar
         init(attrs);
     }
 
-    private void init(@Nullable AttributeSet attrs) {
+    private void init(@Nullable AttributeSet attrs)
+    {
         textPaint = new Paint(Paint.LINEAR_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
         textRect = new Rect();
 
-        if (attrs != null) {
+        if (attrs != null)
+		{
+	        try(TypedArray typedArray = getContext().obtainStyledAttributes(
+				        attrs, R.styleable.MaterialColorPickerTextSeekBar))
+	        {
 
-            final TypedArray typedArray = getContext().obtainStyledAttributes(
-                    attrs, R.styleable.MaterialColorPickerTextSeekBar
-            );
+		        textColor = typedArray.getColor(
+				        R.styleable.MaterialColorPickerTextSeekBar_android_textColor,
+				        0xff000000
+		        );
 
-            try {
+		        textSize = typedArray.getDimension(
+				        R.styleable.MaterialColorPickerTextSeekBar_android_textSize,
+				        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+						        18, getResources().getDisplayMetrics())
+		        );
 
-                textColor = typedArray.getColor(
-                        R.styleable.MaterialColorPickerTextSeekBar_android_textColor,
-                        0xff000000
-                );
+		        text = typedArray.getString(R.styleable.MaterialColorPickerTextSeekBar_android_text);
 
-                textSize = typedArray.getDimension(
-                        R.styleable.MaterialColorPickerTextSeekBar_android_textSize,
-                        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                                18, getResources().getDisplayMetrics())
-                );
-
-                text = typedArray.getString(R.styleable
-                        .MaterialColorPickerTextSeekBar_android_text);
-
-            } finally {
-
-                typedArray.recycle();
-
-            }
-
+		        typedArray.recycle();
+			} catch (Exception e) {
+		        e.printStackTrace();
+	        }
         }
 
         textPaint.setColor(textColor);

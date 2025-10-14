@@ -1,1 +1,11 @@
-include ':library', ':test'
+pluginManagement {
+	repositories {
+		maven { url = 'https://maven.google.com' }
+		maven { url = "https://jitpack.io" }
+		google()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+include ':library'
