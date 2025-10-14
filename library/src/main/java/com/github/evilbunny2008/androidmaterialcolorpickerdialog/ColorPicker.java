@@ -27,8 +27,8 @@ import static com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorFor
  * @author Simone Pessotto
  */
 @SuppressWarnings("unused")
-public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListener {
-
+public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListener
+{
     private final Activity activity;
 
     private View colorView;
@@ -45,14 +45,14 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      *
      * @param activity The reference to the activity where the color picker is called
      */
-    public ColorPicker(Activity activity) {
+    public ColorPicker(Activity activity)
+    {
         super(activity);
 
         this.activity = activity;
 
-        if (activity instanceof ColorPickerCallback) {
+        if (activity instanceof ColorPickerCallback)
             callback = (ColorPickerCallback) activity;
-        }
 
         this.alpha = 255;
         this.red = 0;
@@ -77,7 +77,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     public ColorPicker(Activity activity,
                        @IntRange(from = 0, to = 255) int red,
                        @IntRange(from = 0, to = 255) int green,
-                       @IntRange(from = 0, to = 255) int blue) {
+                       @IntRange(from = 0, to = 255) int blue)
+    {
         this(activity);
 
         this.red = assertColorValueInRange(red);
@@ -91,8 +92,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      * @param activity The reference to the activity where the color picker is called
      * @param color ARGB color
      */
-    public ColorPicker(Activity activity,
-                       @ColorInt int color) {
+    public ColorPicker(Activity activity, @ColorInt int color)
+    {
         this(activity);
 
         this.alpha = Color.alpha(color);
@@ -120,7 +121,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
                        @IntRange(from = 0, to = 255) int alpha,
                        @IntRange(from = 0, to = 255) int red,
                        @IntRange(from = 0, to = 255) int green,
-                       @IntRange(from = 0, to = 255) int blue) {
+                       @IntRange(from = 0, to = 255) int blue)
+    {
         this(activity);
 
         this.alpha = assertColorValueInRange(alpha);
@@ -134,18 +136,21 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     /**
      * Enable auto-dismiss for the dialog
      */
-    public void enableAutoClose(){
+    public void enableAutoClose()
+    {
         this.autoclose = true;
     }
 
     /**
      * Disable auto-dismiss for the dialog
      */
-    public void disableAutoClose(){
+    public void disableAutoClose()
+    {
         this.autoclose = false;
     }
 
-    public void setCallback(ColorPickerCallback listener) {
+    public void setCallback(ColorPickerCallback listener)
+    {
         callback = listener;
     }
 
@@ -155,8 +160,9 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      * @param savedInstanceState As usual ...
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState)
+    {
+		super.onCreate(savedInstanceState);
 
 	    setContentView(R.layout.materialcolorpicker__layout_color_picker);
 
@@ -176,29 +182,30 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
 
         hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(withAlpha ? 8 : 6)});
 
-	    hexCode.setOnEditorActionListener(
-			    (v, actionId, event) ->
-			    {
-				    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-						    actionId == EditorInfo.IME_ACTION_DONE ||
-						    event.getAction() == KeyEvent.ACTION_DOWN &&
-								    event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
-				    {
-					    updateColorView(v.getText().toString());
-					    InputMethodManager imm = (InputMethodManager) activity
-							    .getSystemService(Context.INPUT_METHOD_SERVICE);
-					    imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
+	    hexCode.setOnEditorActionListener((v, actionId, event) ->
+	    {
+		    if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+				    actionId == EditorInfo.IME_ACTION_DONE ||
+				    event.getAction() == KeyEvent.ACTION_DOWN &&
+				    event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+		    {
+			    updateColorView(v.getText().toString());
+			    InputMethodManager imm = (InputMethodManager) activity
+					    .getSystemService(Context.INPUT_METHOD_SERVICE);
+			    imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
 
-					    return true;
-				    }
-				    return false;
-			    });
+			    return true;
+		    }
+
+		    return false;
+	    });
 
 	    final Button okColor = findViewById(R.id.okColorButton);
         okColor.setOnClickListener(view -> sendColor());
     }
 
-    private void initUi() {
+    private void initUi()
+    {
         colorView.setBackgroundColor(getColor());
 
         alphaSeekBar.setProgress(alpha);
@@ -206,9 +213,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         greenSeekBar.setProgress(green);
         blueSeekBar.setProgress(blue);
 
-        if (!withAlpha) {
+        if (!withAlpha)
             alphaSeekBar.setVisibility(View.GONE);
-        }
 
         hexCode.setText(withAlpha
                 ? formatColorValues(alpha, red, green, blue)
@@ -216,7 +222,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         );
     }
 
-    private void sendColor() {
+    private void sendColor()
+    {
         if (callback != null)
             callback.onColorChosen(getColor());
         if(autoclose){
@@ -224,7 +231,8 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
         }
     }
 
-    public void setColor(@ColorInt int color) {
+    public void setColor(@ColorInt int color)
+    {
         alpha = Color.alpha(color);
         red = Color.red(color);
         green = Color.green(color);
@@ -236,8 +244,10 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      *
      * @param input HEX Code of the color.
      */
-    private void updateColorView(String input) {
-        try {
+    private void updateColorView(String input)
+    {
+        try
+        {
             final int color = Color.parseColor('#' + input);
             alpha = Color.alpha(color);
             red = Color.red(color);
@@ -263,24 +273,17 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      * @param fromUser Whether the user is the reason for the method call
      */
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-        if (seekBar.getId() == R.id.alphaSeekBar) {
-
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+    {
+        if (seekBar.getId() == R.id.alphaSeekBar)
+		{
             alpha = progress;
-
         } else if (seekBar.getId() == R.id.redSeekBar) {
-
             red = progress;
-
         } else if (seekBar.getId() == R.id.greenSeekBar) {
-
             green = progress;
-
         } else if (seekBar.getId() == R.id.blueSeekBar) {
-
             blue = progress;
-
         }
 
         colorView.setBackgroundColor(getColor());
@@ -294,11 +297,15 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    public void onStopTrackingTouch(SeekBar seekBar)
+    {
+	    // Stub function...
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    public void onStartTrackingTouch(SeekBar seekBar)
+    {
+	    // Stub function...
     }
 
     /**
@@ -343,30 +350,36 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
     // Erlend: Added setters.
     ////
 
-    public void setAlpha(int alpha) {
+    public void setAlpha(int alpha)
+    {
         this.alpha = alpha;
     }
 
-    public void setRed(int red) {
+    public void setRed(int red)
+    {
         this.red = red;
     }
 
-    public void setGreen(int green) {
+    public void setGreen(int green)
+    {
         this.green = green;
     }
 
-    public void setBlue(int blue) {
+    public void setBlue(int blue)
+    {
         this.blue = blue;
     }
 
-    public void setAll(int alpha, int red, int green, int blue) {
+    public void setAll(int alpha, int red, int green, int blue)
+    {
         this.alpha = alpha;
         this.red = red;
         this.green = green;
         this.blue = blue;
     }
 
-    public void setColors(int red, int green, int blue) {
+    public void setColors(int red, int green, int blue)
+    {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -387,12 +400,14 @@ public class ColorPicker extends Dialog implements SeekBar.OnSeekBarChangeListen
      *
      * @return Selected color as Android Color class value.
      */
-    public int getColor() {
+    public int getColor()
+    {
         return withAlpha ? Color.argb(alpha, red, green, blue) : Color.rgb(red, green, blue);
     }
 
     @Override
-    public void show() {
+    public void show()
+    {
         super.show();
         initUi();
     }

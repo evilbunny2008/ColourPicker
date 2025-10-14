@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="materialcolorpicker__app_name">Android Material Color Picker Dialog</string>
 
     <string name="materialcolorpicker__descLib">Material Color Picker Dialog</string>
@@ -6,4 +6,5 @@
     <string name="materialcolorpicker__inputColor">Color: </string>
     <string name="materialcolorpicker__btnSelectColor">Select</string>
     <string name="materialcolorpicker__hash" translatable="false">#</string>
+	<string name="pick_a_color" tools:ignore="MissingTranslation,ResourceName">Tap to pick a color</string>
 </resources>

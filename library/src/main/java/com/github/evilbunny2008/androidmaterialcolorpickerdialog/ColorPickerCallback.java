@@ -7,7 +7,8 @@ import androidx.annotation.ColorInt;
  *
  * @author Patrick Geselbracht
  */
-public interface ColorPickerCallback {
+public interface ColorPickerCallback
+{
     /**
      * Gets called whenever a user chooses a color from the ColorPicker, i.e., presses the
      * "Choose" button.
