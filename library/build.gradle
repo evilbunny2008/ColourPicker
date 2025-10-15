@@ -9,15 +9,20 @@ android {
     defaultConfig {
 	    minSdk = 23
         targetSdk = 36
-	    version = "1.3.11"
-	    versionCode = 1003011
+	    version = "1.3.12"
+	    versionCode = 1003012
     }
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_21
+		targetCompatibility JavaVersion.VERSION_21
+	}
 
 	buildTypes {
 		release {
 			minifyEnabled = true
 			shrinkResources = false
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			consumerProguardFiles 'proguard-rules.pro'
 		}
 
 		debug {
@@ -41,13 +46,4 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.7.1'
-}
-
-allprojects {
-    repositories {
-	    maven { url = 'https://jitpack.io' }
-	    maven { url = 'https://maven.google.com' }
-        mavenCentral()
-	    google()
-    }
 }
