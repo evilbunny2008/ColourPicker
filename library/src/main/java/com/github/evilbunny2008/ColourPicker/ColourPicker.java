@@ -27,13 +27,13 @@ import androidx.annotation.NonNull;
  */
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-public class ColourPicker extends Dialog implements Slider.OnChangeListener
+public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 {
 	private final Activity activity;
 	private @ColorInt int current_colour;
 
 	private View colourView;
-	private Slider alphaSeekBar, redSeekBar, greenSeekBar, blueSeekBar;
+	private CPSlider alphaSeekBar, redSeekBar, greenSeekBar, blueSeekBar;
 	private CustomEditText hexCode;
 	private int alpha, red, green, blue;
 

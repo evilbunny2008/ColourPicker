@@ -3,22 +3,24 @@ package com.github.evilbunny2008.ColourPicker;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import com.google.android.material.slider.Slider;
+
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-class Slider extends com.google.android.material.slider.Slider
+class CPSlider extends Slider
 {
-	public Slider(Context context)
+	public CPSlider(Context context)
 	{
 		super(context);
 		init(null);
 	}
 
-	public Slider(Context context, AttributeSet attrs)
+	public CPSlider(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		init(attrs);
 	}
 
-	public Slider(Context context, AttributeSet attrs, int defStyleAttr)
+	public CPSlider(Context context, AttributeSet attrs, int defStyleAttr)
 	{
 		super(context, attrs, defStyleAttr);
 		init(attrs);

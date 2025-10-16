@@ -6,17 +6,17 @@ import android.util.AttributeSet;
 import android.view.View;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-public class EditText extends CustomEditText
+public class CPEditText extends CustomEditText
 {
 	private OnColourPickedListener listener;
 
-	public EditText(Context context, AttributeSet attrs)
+	public CPEditText(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		init(context, attrs, 0);
 	}
 
-	public EditText(Context context, AttributeSet attrs, int defStyleAttr)
+	public CPEditText(Context context, AttributeSet attrs, int defStyleAttr)
 	{
 		super(context, attrs, defStyleAttr);
 		init(context, attrs, defStyleAttr);
