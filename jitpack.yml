@@ -1,2 +1,2 @@
 install:
-  - ./gradlew clean assembleRelease
+  - mvn install -DgroupId=com.lb.sdktest -DartifactId=test -Dversion=1.0 -Dpackaging=aar -DgeneratePom=true
