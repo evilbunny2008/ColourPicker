@@ -1,2 +1,4 @@
-install:
-  - ./gradlew clean :library:assembleRelease -x test -x lintDebug
+android:
+  module: library
+  tasks:
+    - assembleRelease
