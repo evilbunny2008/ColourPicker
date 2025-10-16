@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:theme="@style/AppTheme"
+	tools:context=".ColourPicker">
+
+    <View
+        android:id="@+id/colourView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <com.github.evilbunny2008.ColourPicker.Slider
+            android:id="@+id/alphaSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+	        android:valueFrom="0"
+	        android:valueTo="255"
+	        android:stepSize="1"
+            android:maxHeight="3dip"
+            android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Alpha" />
+
+        <com.github.evilbunny2008.ColourPicker.Slider
+            android:id="@+id/redSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alphaSeekBar"
+	        android:valueFrom="0"
+	        android:valueTo="255"
+	        android:stepSize="1"
+	        android:maxHeight="3dip"
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Red" />
+
+        <com.github.evilbunny2008.ColourPicker.Slider
+            android:id="@+id/greenSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/redSeekBar"
+	        android:valueFrom="0"
+	        android:valueTo="255"
+	        android:stepSize="1"
+	        android:maxHeight="3dip"
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Green" />
+
+        <com.github.evilbunny2008.ColourPicker.Slider
+            android:id="@+id/blueSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/greenSeekBar"
+	        android:valueFrom="0"
+	        android:valueTo="255"
+	        android:stepSize="1"
+	        android:maxHeight="3dip"
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Blue" />
+
+	    <LinearLayout style="@style/Widget.LinearLayout">
+		    <com.google.android.material.textfield.TextInputLayout
+			    style="@style/Widget.TextView">
+			    <com.github.evilbunny2008.ColourPicker.CustomEditText
+				    style="@style/Widget.CustomEditText"
+				    android:id="@+id/hexCode"
+				    tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
+		    </com.google.android.material.textfield.TextInputLayout>
+
+		    <View style="@style/Widget.Spacer"/>
+
+		    <com.google.android.material.button.MaterialButton
+			    style="@style/Widget.Button"
+			    android:id="@+id/okColourButton"
+			    tools:ignore="ButtonStyle,VisualLintButtonSize" />
+	    </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

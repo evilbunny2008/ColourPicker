@@ -1,8 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<style name="Widget">
+		<!-- Stub  -->
+	</style>
 
-    <!-- Base application theme. -->
-    <style name="materialcolorpicker__AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+	<style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+	    <!-- Stub -->
     </style>
 
+	<!-- ==== ALPHA ==== -->
+	<style name="Widget.App.Material3.Slider.Alpha" parent="Widget.Material3.Slider">
+		<item name="thumbColor">@color/alpha_thumb</item>
+		<item name="trackColorActive">@color/alpha_active</item>
+		<item name="trackColorInactive">@color/alpha_inactive</item>
+		<item name="tickColorActive">@color/alpha_active</item>
+		<item name="tickColorInactive">@color/alpha_inactive</item>
+		<item name="labelBehavior">floating</item>
+	</style>
+
+	<!-- ==== RED ==== -->
+	<style name="Widget.App.Material3.Slider.Red" parent="Widget.Material3.Slider">
+		<item name="thumbColor">@color/red_thumb</item>
+		<item name="trackColorActive">@color/red_active</item>
+		<item name="trackColorInactive">@color/red_inactive</item>
+		<item name="tickColorActive">@color/red_active</item>
+		<item name="tickColorInactive">@color/red_inactive</item>
+		<item name="labelBehavior">floating</item>
+	</style>
+
+	<!-- ==== GREEN ==== -->
+	<style name="Widget.App.Material3.Slider.Green" parent="Widget.Material3.Slider">
+		<item name="thumbColor">@color/green_thumb</item>
+		<item name="trackColorActive">@color/green_active</item>
+		<item name="trackColorInactive">@color/green_inactive</item>
+		<item name="tickColorActive">@color/green_active</item>
+		<item name="tickColorInactive">@color/green_inactive</item>
+		<item name="labelBehavior">floating</item>
+	</style>
+
+	<!-- ==== BLUE ==== -->
+	<style name="Widget.App.Material3.Slider.Blue" parent="Widget.Material3.Slider">
+		<item name="thumbColor">@color/blue_thumb</item>
+		<item name="trackColorActive">@color/blue_active</item>
+		<item name="trackColorInactive">@color/blue_inactive</item>
+		<item name="tickColorActive">@color/blue_active</item>
+		<item name="tickColorInactive">@color/blue_inactive</item>
+		<item name="labelBehavior">floating</item>
+	</style>
+
+	<style name="Widget.LinearLayout">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:gravity">start</item>
+		<item name="android:layout_below">@id/blueSeekBar</item>
+		<item name="android:paddingTop">15dp</item>
+	</style>
+
+	<style name="Widget.TextView" parent="Widget.Material3.MaterialTimePicker.Display.TextInputLayout">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:hint">@string/pick_a_colour2</item>
+	</style>
+
+	<style name="Widget.CustomEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+		<!-- Core sizing -->
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+
+		<!-- Behavior -->
+		<item name="android:clickable">true</item>
+		<item name="android:focusable">true</item>
+		<item name="android:gravity">start</item>
+
+		<!-- Input behavior -->
+		<item name="android:imeOptions">actionDone|actionGo|actionSend</item>
+		<item name="android:inputType">textCapCharacters|textNoSuggestions</item>
+
+		<!-- Limits -->
+		<item name="android:lines">1</item>
+		<item name="android:maxLines">1</item>
+		<item name="android:maxLength">9</item>
+
+		<!-- Text Size -->
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<style name="Widget.Spacer">
+		<item name="android:layout_width">5sp</item>
+		<item name="android:layout_height">0sp</item>
+	</style>
+
+	<style name="Widget.Button" parent="Widget.Material3.Button">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:clickable">true</item>
+		<item name="android:text">@string/btnSelectColour</item>
+		<item name="android:focusable">true</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:insetTop">8dp</item>
+	<item name="android:insetBottom">8dp</item>
+	</style>
 </resources>

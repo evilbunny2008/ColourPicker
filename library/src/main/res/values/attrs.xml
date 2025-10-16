@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <declare-styleable name="MaterialColorPickerTextSeekBar">
+    <declare-styleable name="EditText">
         <attr name="android:text"/>
         <attr name="android:textColor"/>
         <attr name="android:textSize"/>
     </declare-styleable>
+
+	<declare-styleable name="Slider">
+		<attr name="pickerColour" format="color" />
+		<attr name="showPreview" format="boolean" />
+	</declare-styleable>
 </resources>
