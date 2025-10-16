@@ -1,5 +1,6 @@
 plugins {
 	id 'com.android.library'
+	id 'maven-publish'
 }
 
 android {
@@ -47,4 +48,13 @@ dependencies {
 
 tasks.withType(Test).configureEach {
 	enabled = false
+}
+
+publishing {
+	repositories {
+		maven {
+			// change to point to your repo, e.g. http://my.org/repo
+			url = layout.buildDirectory.dir('https://www.github.com/evilbunny2008/ColourPicker/')
+		}
+	}
 }
