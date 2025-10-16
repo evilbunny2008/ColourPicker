@@ -1,2 +1,2 @@
 install:
-  - ./gradlew clean build
+  - ./gradlew clean :library:assembleRelease -x test -x lintDebug
