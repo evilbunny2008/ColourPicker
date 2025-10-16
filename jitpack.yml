@@ -1,2 +1,2 @@
 install:
-  - ./gradlew clean assembleRelease
+  - ./gradlew clean build
