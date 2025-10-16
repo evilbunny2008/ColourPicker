@@ -38,6 +38,12 @@ android {
 		options.compilerArgs += ['-Xlint:deprecation']
 	}
 
+	publishing {
+		singleVariant("release") {
+			withSourcesJar()
+		}
+	}
+
 	namespace = 'com.github.evilbunny2008.ColourPicker'
 }
 
@@ -50,11 +56,15 @@ tasks.withType(Test).configureEach {
 	enabled = false
 }
 
-publishing {
-	repositories {
-		maven {
-			// change to point to your repo, e.g. http://my.org/repo
-			url = layout.buildDirectory.dir('https://www.github.com/evilbunny2008/ColourPicker/')
+afterEvaluate {
+	publishing {
+		publications {
+			release(MavenPublication) {
+				from components.release
+				groupId = 'com.github.evilbunny2008'
+				artifactId = 'ColourPicker'
+				version = '2.0.0'
+			}
 		}
 	}
 }
