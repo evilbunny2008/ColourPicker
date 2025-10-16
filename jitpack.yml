@@ -1,4 +1,4 @@
 android:
   module: library
   tasks:
-    - assembleRelease
+    - publishReleasePublicationToMavenLocal
