@@ -42,7 +42,7 @@ dependency in your `build.gradle`.
 (module)
 ```groovy    
     dependencies {
-        implementation 'com.github.evilbunny2008:colourpicker:2.0.0'
+        implementation 'com.github.evilbunny2008:colourpicker:2.0.10'
     }
 ```
 
