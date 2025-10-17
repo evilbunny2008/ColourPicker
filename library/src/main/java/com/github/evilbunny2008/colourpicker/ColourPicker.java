@@ -243,8 +243,8 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 			redSeekBar.setValue(red);
 			greenSeekBar.setValue(green);
 			blueSeekBar.setValue(blue);
-		} catch (IllegalArgumentException ignored) {
-			hexCode.setError(activity.getResources().getText(R.string.errHex));
+		} catch (Exception e) {
+			hexCode.setError(e.toString());
 		}
 	}
 

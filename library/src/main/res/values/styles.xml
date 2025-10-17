@@ -61,7 +61,7 @@
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_width">0dp</item>
 		<item name="android:layout_weight">1</item>
-		<item name="android:hint">@string/pick_a_colour2</item>
+		<item name="android:hint">@string/pick_a_colour</item>
 	</style>
 
 	<style name="Widget.CustomEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
