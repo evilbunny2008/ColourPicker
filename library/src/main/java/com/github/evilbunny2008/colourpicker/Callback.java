@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
  *
  * @author Patrick Geselbracht
  */
+
 public interface Callback
 {
 	/**

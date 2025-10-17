@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="btnSelectColour">선택하다</string>
+    <string name="pick_a_colour">색상을 선택하세요</string>
+</resources>
