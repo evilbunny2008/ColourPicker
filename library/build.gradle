@@ -3,22 +3,31 @@ plugins {
 	id 'maven-publish'
 }
 
+afterEvaluate {
+	publishing {
+		publications {
+			release(MavenPublication) {
+				from components.release
+				groupId = 'com.github.evilbunny2008'
+				artifactId = 'colourpicker'
+				version = '2.0.11'
+			}
+		}
+	}
+}
+
 android {
 	compileSdk = 36
 	defaultConfig {
 		minSdk = 23
 		targetSdk = 36
-		version = "2.0.10"
-		versionCode = 2000010
-	}
-
-	buildFeatures {
-		buildConfig = true
+		version = "2.0.11"
+		versionCode = 2000011
 	}
 
 	buildTypes {
 		release {
-			minifyEnabled = true
+			minifyEnabled = false
 			shrinkResources = false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
@@ -54,17 +63,4 @@ dependencies {
 
 tasks.withType(Test).configureEach {
 	enabled = false
-}
-
-afterEvaluate {
-	publishing {
-		publications {
-			release(MavenPublication) {
-				from components.release
-				groupId = 'com.github.evilbunny2008'
-				artifactId = 'colourpicker'
-				version = '2.0.10'
-			}
-		}
-	}
 }
