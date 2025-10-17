@@ -29,8 +29,6 @@ public class CustomEditText extends TextInputEditText
 
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
-		setOnClickListener(this::handleClick);
-
 		if(Common.isEmpty(getText()))
 		{
 			setText(String.valueOf(fixedChar));
@@ -116,7 +114,7 @@ public class CustomEditText extends TextInputEditText
 		void onColourPicked(int colour, boolean isForeground);
 	}
 
-	private void handleClick(View v)
+	public void handleClick(View v)
 	{
 		Activity activity = Common.getActivity(v.getContext());
 		int colour = Common.parseHexToColour(getText() != null ? getText().toString() : "#FFFFFFFF");
