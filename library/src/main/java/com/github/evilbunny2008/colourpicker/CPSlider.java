@@ -1,4 +1,4 @@
-package com.github.evilbunny2008.ColourPicker;
+package com.github.evilbunny2008.colourpicker;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import com.google.android.material.slider.Slider;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-class CPSlider extends Slider
+public class CPSlider extends Slider
 {
 	public CPSlider(Context context)
 	{

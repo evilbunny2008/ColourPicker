@@ -1,4 +1,4 @@
-package com.github.evilbunny2008.ColourPicker;
+package com.github.evilbunny2008.colourpicker;
 
 import androidx.annotation.IntRange;
 

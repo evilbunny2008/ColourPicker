@@ -1,4 +1,4 @@
-package com.github.evilbunny2008.ColourPicker;
+package com.github.evilbunny2008.colourpicker;
 
 import androidx.annotation.ColorInt;
 
@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt;
 public interface Callback
 {
 	/**
-	 * Gets called whenever a user chooses a colour from the ColourPicker, i.e., presses the
+	 * Gets called whenever a user chooses a colour from the colourpicker, i.e., presses the
 	 * "Choose" button.
 	 *
 	 * @param colour Colour chosen

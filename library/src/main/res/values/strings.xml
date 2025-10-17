@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">ColourPicker</string>
+    <string name="app_name">colourpicker</string>
     <string name="descLib">Material Colour Picker</string>
     <string name="errHex">Hex Code Format incorrect</string>
     <string name="inputColour">Colour: </string>

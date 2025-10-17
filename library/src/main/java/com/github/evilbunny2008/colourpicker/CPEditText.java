@@ -1,4 +1,4 @@
-package com.github.evilbunny2008.ColourPicker;
+package com.github.evilbunny2008.colourpicker;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +24,7 @@ public class CPEditText extends CustomEditText
 
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
+		super.init(context, attrs, defStyleAttr);
 		setOnClickListener(this::handleClick);
 	}
 

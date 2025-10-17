@@ -18,7 +18,7 @@ android {
 
 	buildTypes {
 		release {
-			minifyEnabled = true
+			minifyEnabled = false
 			shrinkResources = false
 			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 		}
@@ -44,7 +44,7 @@ android {
 		}
 	}
 
-	namespace = 'com.github.evilbunny2008.ColourPicker'
+	namespace = 'com.github.evilbunny2008.colourpicker'
 }
 
 dependencies {
@@ -62,7 +62,7 @@ afterEvaluate {
 			release(MavenPublication) {
 				from components.release
 				groupId = 'com.github.evilbunny2008'
-				artifactId = 'ColourPicker'
+				artifactId = 'colourpicker'
 				version = '2.0.0'
 			}
 		}

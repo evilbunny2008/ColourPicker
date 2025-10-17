@@ -3,7 +3,7 @@ This project has been forked as the original project is no longer maintained, th
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DV499BFU9XWFQ)
 
-# ColourPicker EditText
+# Colourpicker EditText
 A simple, minimalistic and beautiful dialog color picker for Android 4.1+ devices. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
 
 Features
@@ -42,7 +42,7 @@ dependency in your `build.gradle`.
 (module)
 ```groovy    
     dependencies {
-        implementation 'com.github.evilbunny2008:ColourPicker:2.0.0'
+        implementation 'com.github.evilbunny2008:Colourpicker:2.0.0'
     }
 ```
 
