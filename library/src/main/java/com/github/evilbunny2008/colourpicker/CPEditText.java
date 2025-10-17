@@ -21,6 +21,6 @@ public class CPEditText extends CustomEditText
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
 		super.init(context, attrs, defStyleAttr);
-		//setOnClickListener(this::handleClick);
+		setOnClickListener(this::handleClick);
 	}
 }
