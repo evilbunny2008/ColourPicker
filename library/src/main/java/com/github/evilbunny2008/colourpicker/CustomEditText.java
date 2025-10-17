@@ -1,15 +1,18 @@
 package com.github.evilbunny2008.colourpicker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CustomEditText extends TextInputEditText
 {
+	private OnColourPickedListener listener;
 	private char fixedChar = '#';
 
 	public CustomEditText(Context context, AttributeSet attrs)
@@ -26,6 +29,8 @@ public class CustomEditText extends TextInputEditText
 
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
+		setOnClickListener(this::handleClick);
+
 		if(Common.isEmpty(getText()))
 		{
 			setText(String.valueOf(fixedChar));
@@ -69,6 +74,11 @@ public class CustomEditText extends TextInputEditText
 		});
 	}
 
+	public void setOnColourPickedListener(OnColourPickedListener listener)
+	{
+		this.listener = listener;
+	}
+
 	@Override
 	public void setText(CharSequence text, BufferType type)
 	{
@@ -99,5 +109,35 @@ public class CustomEditText extends TextInputEditText
 			return "";
 
 		return text.subSequence(1, text.length()).toString();
+	}
+
+	public interface OnColourPickedListener
+	{
+		void onColourPicked(int colour, boolean isForeground);
+	}
+
+	private void handleClick(View v)
+	{
+		Activity activity = Common.getActivity(v.getContext());
+		int colour = Common.parseHexToColour(getText() != null ? getText().toString() : "#FFFFFFFF");
+		ColourPicker cp = new ColourPicker(activity,
+				(colour >> 24) & 0xFF,
+				(colour >> 16) & 0xFF,
+				(colour >> 8) & 0xFF,
+				colour & 0xFF);
+
+		cp.setCallback(newColour ->
+		{
+			String hex = Common.to_ARGB_hex(String.format("%8X", newColour));
+			Common.LogMessage("Pure Hex: " + hex);
+			setText(hex);
+
+			if(listener != null)
+				listener.onColourPicked(newColour, true);
+
+			cp.dismiss();
+		});
+
+		cp.show();
 	}
 }
