@@ -23,6 +23,7 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <com.github.evilbunny2008.colourpicker.CPSlider
+	        style="@style/Widget.App.Material3.Slider.Alpha"
             android:id="@+id/alphaSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,11 +31,11 @@
 	        android:valueTo="255"
 	        android:stepSize="1"
             android:maxHeight="3dip"
-            android:minHeight="3dip"
-	        style="@style/Widget.App.Material3.Slider.Alpha" />
+            android:minHeight="3dip" />
 
         <com.github.evilbunny2008.colourpicker.CPSlider
-            android:id="@+id/redSeekBar"
+	        style="@style/Widget.App.Material3.Slider.Red"
+	        android:id="@+id/redSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/alphaSeekBar"
@@ -42,10 +43,10 @@
 	        android:valueTo="255"
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip"
-	        style="@style/Widget.App.Material3.Slider.Red" />
+	        android:minHeight="3dip" />
 
         <com.github.evilbunny2008.colourpicker.CPSlider
+	        style="@style/Widget.App.Material3.Slider.Green"
             android:id="@+id/greenSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,10 +55,10 @@
 	        android:valueTo="255"
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip"
-	        style="@style/Widget.App.Material3.Slider.Green" />
+	        android:minHeight="3dip" />
 
         <com.github.evilbunny2008.colourpicker.CPSlider
+	        style="@style/Widget.App.Material3.Slider.Blue"
             android:id="@+id/blueSeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,8 +67,7 @@
 	        android:valueTo="255"
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip"
-	        style="@style/Widget.App.Material3.Slider.Blue" />
+	        android:minHeight="3dip" />
 
 	    <LinearLayout style="@style/Widget.LinearLayout">
 		    <com.google.android.material.textfield.TextInputLayout
