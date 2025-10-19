@@ -118,11 +118,7 @@ And that's all that's all :)
 
 Example app that use Android Material Color Picker Dialog to let users choose the color of the Qr Code:
 
-* [Qr Code Generator Play Store](https://play.google.com/store/apps/details?id=com.pes.qrcodegeneratorv2)
-
-* [Qr Code Generator Direct Download](http://www.simonepessotto.it/App/QrCodeGeneratorRevolution.apk)
-
-* [weeWX Weather App](https://play.google.com/store/apps/details?id=com.odiousapps.weewxweather)
+* [weeWX Weather App](https://play.google.com/store/apps/details?id=com.odiousapps.weewxweather) ([Source Code](https://github.com/evilbunny2008/weewxweatherApp/))
 
 ## LICENSE
 
