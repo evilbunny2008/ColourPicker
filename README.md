@@ -1,7 +1,4 @@
-This project has been forked as the original project is no longer maintained, the only credit for this library I can take is for updating it to SDK33 and publishing it on https://jitpack.io
-
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DV499BFU9XWFQ)
+This project has been forked as the original project is no longer maintained, not only has it been updated to SDK36 but now has custom widgets to put most of the logic in the library itself.
 
 # ColourPicker EditText
 A simple, minimalistic and beautiful dialog color picker for Android 4.1+ devices. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
@@ -29,127 +26,103 @@ Landscape
 ## HOW TO USE IT
 
 ### Adding the library to your project
-The aar artifact is available at the **jcenter** repository. Declare the repository and the
-dependency in your `build.gradle`.
+The aar library is available from the jitpack.io repository, to use it you must list the repository in your `settings.gradle`.
     
-(root)
-```groovy
-    repositories {
-        maven { url "https://jitpack.io" }
-    }
+```text
+pluginManagement {
+	repositories {
+		maven { url = "https://jitpack.io" }
+		maven { url = 'https://maven.google.com' }
+		google()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
+dependencyResolutionManagement {
+	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+	repositories {
+		maven { url = "https://jitpack.io" }
+		maven { url = 'https://maven.google.com' }
+		google()
+		mavenCentral()
+	}
+}
+
+include ':app'
 ```
-    
-(module)
-```groovy    
-    dependencies {
-        implementation 'com.github.evilbunny2008:colourpicker:2.0.10'
-    }
+You may also need to remove other repository listings in build.gradle files as declaring in the settings.gradle file is now the best practice.
+
+You also need to add an implementation line to the app build.gradle file.
+
 ```
-
-### Use the library
-
-Import the class
-```java
-    import com.github.evilbunny2008.androidmaterialcolorpickerdialog.ColorPicker;
-```
-
-Create a color picker dialog object
-
-```java
-    final ColorPicker cp = new ColorPicker(MainActivity.this, defaultColorR, defaultColorG, defaultColorB);
-```
-
-defaultColorR, defaultColorG, defaultColorB are 3 integer (value 0-255) for the initialization of the color picker with your custom color value. If you don't want to start with a color set them to 0 or use only the first argument.
-
-The library also supports alpha values. If no color or only red, green, and blue are specified, the alpha value is set to 255 (0xFF) and no slider is shown.
-
-Use the following constructor to specify an alternative alpha channel value (0..255). As soon as the alpha value constructor is used, a fourth slider will appear above the RGB sliders and the text input field will change from six HEX characters to eight.
-
-```java
-    final ColorPicker cp = new ColorPicker(MainActivity.this, defaultAlphaValue, defaultColorR, defaultColorG, defaultColorB);
+implementation 'com.github.evilbunny2008:ColourPicker:2.0.12'
 ```
 
+### How to add a widget to a layout
 
-Then show the dialog (when and where you want) and save the selected color
+Open up a xml layout and add a CPEditText widget, note that because ColourPicker is now based on Material3 widgets you need to declare CPEditText inside a TextInputLayout widget:
 
-```java
-    /* Show color picker dialog */
-    cp.show();
-    
-	cp.enableAutoClose(); // Enable auto-dismiss for the dialog
-	
-    /* Set a new Listener called when user click "select" */
-    cp.setCallback(new ColorPickerCallback() {
-        @Override
-        public void onColorChosen(@ColorInt int color) {
-            // Do whatever you want
-	    // Examples
-	    Log.d("Alpha", Integer.toString(Color.alpha(color)));
-	    Log.d("Red", Integer.toString(Color.red(color)));
-	    Log.d("Green", Integer.toString(Color.green(color)));
-	    Log.d("Blue", Integer.toString(Color.blue(color)));
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<com.google.android.material.textfield.TextInputLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="@string/textHint">
+		<com.github.evilbunny2008.colourpicker.CPEditText
+			android:id="@+id/myCPEditText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" />
+	</com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>
+```
+### Java code to handle a CPEditText
 
-	    Log.d("Pure Hex", Integer.toHexString(color));
-	    Log.d("#Hex no alpha", String.format("#%06X", (0xFFFFFF & color)));
-	    Log.d("#Hex with alpha", String.format("#%08X", (0xFFFFFFFF & color)));
+As CPEditText extends TextInputEditText everything that works for a TextInputEditText widget will also work for a CPEditText.
+
+In your activity add code similar to the following:
+
+```
+package com.example.myapp;
+
+import android.os.Bundle;
+
+import com.github.evilbunny2008.colourpicker.CPEditText;
+import com.odiousapps.weewxweather.R;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class TestActivity extends AppCompatActivity
+{
+	private CPEditText myCPEditText;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+
+		myCPEditText = findViewById(R.id.myCPEditText);
 		
-		// If the auto-dismiss option is not enable (disabled as default) you have to manually dimiss the dialog
-		// cp.dismiss();
-        }
-    });
+		...
+	}
+}
 ```
 
-That's all :)
-
-### Transition from v1.1 to v1.2
-
-The deprecated callback has been removed. See *Transition from v1.0 to v1.1*.
-
-### Transition from v1.0 to v1.1
-
-Version 1.1 introduced some API changes---mainly a renaming of the `OnColorSelected` callback interface. This has been renamed to `ColorPickerCallback`.
-
-The old interface is still in the library but will be removed in the next version update. It has been marked as deprecated and isn't called by the library, therefore no values will appear in your app if you still rely on the old interface.
- 
-
-## Translations
-### Available Languages
-* English
-* Italian
-* German
-* French
-* Spanish
-* Iranian
-* Persian
-* Korean
-* Turkish
-* Russian
-* Portuguese
-* Chinese(Simplified)
-
-If you would like to help localise this library please fork the project, create and verify your language files, add the language to the README then create a pull request.
-
+And that's all that's all :) 
 
 ## Example
 
 Example app that use Android Material Color Picker Dialog to let users choose the color of the Qr Code:
 
-[Qr Code Generator Play Store](https://play.google.com/store/apps/details?id=com.pes.qrcodegeneratorv2)
+* [Qr Code Generator Play Store](https://play.google.com/store/apps/details?id=com.pes.qrcodegeneratorv2)
 
-[Qr Code Generator Direct Download](http://www.simonepessotto.it/App/QrCodeGeneratorRevolution.apk)
+* [Qr Code Generator Direct Download](http://www.simonepessotto.it/App/QrCodeGeneratorRevolution.apk)
 
-## Donation
-If this project help you reduce time to develop, you can give me a cup of coffee :) 
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DV499BFU9XWFQ)
-
-## Contributors
-
-Author: [Simone Pessotto](https://www.simonepessotto.it)
-
-### Special thanks to :
-
-[Patrick Geselbracht](https://github.com/PattaFeuFeu)
+* [weeWX Weather App](https://play.google.com/store/apps/details?id=com.odiousapps.weewxweather)
 
 ## LICENSE
 
