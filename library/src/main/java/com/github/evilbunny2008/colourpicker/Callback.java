@@ -8,6 +8,7 @@ import androidx.annotation.ColorInt;
  * @author Patrick Geselbracht
  */
 
+@SuppressWarnings("unused")
 public interface Callback
 {
 	/**

@@ -164,7 +164,9 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 					event.getAction() == KeyEvent.ACTION_DOWN &&
 							event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
 			{
-				updateColourView(v.getText().toString());
+				float f = Float.parseFloat(v.getText().toString());
+				int i = (int)f;
+				updateColourView(i);
 				InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
 
@@ -176,6 +178,12 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 
 		final Button okColour = findViewById(R.id.okColourButton);
 		okColour.setOnClickListener(view -> sendColour());
+	}
+
+	@Override
+	public void onValueChange(@NonNull Slider slider, float value, boolean from_user)
+	{
+		updateColourView((int)value);
 	}
 
 	private void initUi()
@@ -222,16 +230,13 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 		blue = Color.blue(colour);
 	}
 
-	/**
-	 * Method that synchronizes the colour between the bars, the view, and the HEX code text.
-	 *
-	 * @param input HEX Code of the colour.
-	 */
-	private void updateColourView(String input)
+	 // Method that synchronizes the colour between the bars, the view, and the HEX code text.
+	 // @param input HEX Code of the colour.
+
+	private void updateColourView(int colour)
 	{
 		try
 		{
-			final int colour = Color.parseColor('#' + input);
 			alpha = Color.alpha(colour);
 			red = Color.red(colour);
 			green = Color.green(colour);
@@ -343,26 +348,5 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 	{
 		super.show();
 		initUi();
-	}
-
-	@Override
-	public void onValueChange(@NonNull Slider slider, float value, boolean b)
-	{
-		if (slider.getId() == R.id.alphaSeekBar)
-			alpha = (int)value;
-		else if (slider.getId() == R.id.redSeekBar)
-			red = (int)value;
-		else if (slider.getId() == R.id.greenSeekBar)
-			green = (int)value;
-		else if (slider.getId() == R.id.blueSeekBar)
-			blue = (int)value;
-
-		colourView.setBackgroundColor(getColour());
-
-		//Setting the inputText hex colour
-		String hex = FormatHelper.formatColourValues(alpha, red, green, blue);
-		hex = Common.to_ARGB_hex(hex);
-		hexCode.setText(hex);
-		Common.LogMessage("line366 Setting hexCode to " + hex);
 	}
 }
