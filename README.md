@@ -112,7 +112,7 @@ public class TestActivity extends AppCompatActivity
 }
 ```
 
-And that's all that's all :) 
+And that's all that's it takes! :) 
 
 ## Example
 
