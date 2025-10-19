@@ -32,7 +32,6 @@ The aar library is available from the jitpack.io repository, to use it you must 
 pluginManagement {
 	repositories {
 		maven { url = "https://jitpack.io" }
-		maven { url = 'https://maven.google.com' }
 		google()
 		mavenCentral()
 		gradlePluginPortal()
@@ -43,7 +42,6 @@ dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
 		maven { url = "https://jitpack.io" }
-		maven { url = 'https://maven.google.com' }
 		google()
 		mavenCentral()
 	}
