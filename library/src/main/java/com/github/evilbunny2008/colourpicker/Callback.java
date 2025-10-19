@@ -12,7 +12,7 @@ import androidx.annotation.ColorInt;
 public interface Callback
 {
 	/**
-	 * Gets called whenever a user chooses a colour from the colourpicker, i.e., presses the
+	 * Gets called whenever a user chooses a colour from the colour picker, i.e., presses the
 	 * "Choose" button.
 	 *
 	 * @param colour Colour chosen

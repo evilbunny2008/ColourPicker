@@ -72,11 +72,6 @@ public class CustomEditText extends TextInputEditText
 		});
 	}
 
-	public void setOnColourPickedListener(OnColourPickedListener listener)
-	{
-		this.listener = listener;
-	}
-
 	@Override
 	public void setText(CharSequence text, BufferType type)
 	{
@@ -112,6 +107,12 @@ public class CustomEditText extends TextInputEditText
 	public interface OnColourPickedListener
 	{
 		void onColourPicked(int colour, boolean isForeground);
+	}
+
+
+	public void setOnColourPickedListener(OnColourPickedListener listener)
+	{
+		this.listener = listener;
 	}
 
 	public void handleClick(View v)

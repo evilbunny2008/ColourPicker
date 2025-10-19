@@ -164,9 +164,11 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 					event.getAction() == KeyEvent.ACTION_DOWN &&
 							event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
 			{
-				float f = Float.parseFloat(v.getText().toString());
-				int i = (int)f;
-				updateColourView(i);
+				Editable tmp = hexCode.getText();
+				if(tmp == null)
+					return true;
+
+				updateColourView(hexCode.getText().toString());
 				InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
 
@@ -183,7 +185,15 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 	@Override
 	public void onValueChange(@NonNull Slider slider, float value, boolean from_user)
 	{
-		updateColourView((int)value);
+		alpha = (int)alphaSeekBar.getValue();
+		red = (int)redSeekBar.getValue();
+		green = (int)greenSeekBar.getValue();
+		blue = (int)blueSeekBar.getValue();
+
+		String hex = String.format("#%08X", getColour());
+		hexCode.setText(hex);
+
+		colourView.setBackgroundColor(getColour());
 	}
 
 	private void initUi()
@@ -232,15 +242,15 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 
 	 // Method that synchronizes the colour between the bars, the view, and the HEX code text.
 	 // @param input HEX Code of the colour.
-
-	private void updateColourView(int colour)
+	private void updateColourView(String colour)
 	{
 		try
 		{
-			alpha = Color.alpha(colour);
-			red = Color.red(colour);
-			green = Color.green(colour);
-			blue = Color.blue(colour);
+			int tmp_colour = (int)Long.parseLong(colour.substring(1), 16);
+			alpha = (tmp_colour >> 24) & 0xFF;
+			red = (tmp_colour >> 16) & 0xFF;
+			green = (tmp_colour >> 8) & 0xFF;
+			blue = (tmp_colour & 0xFF) & 0xFF;
 
 			colourView.setBackgroundColor(getColour());
 
