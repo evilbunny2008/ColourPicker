@@ -43,9 +43,6 @@ captures/
 .idea/gradle.xml
 .idea/libraries
 
-# Gradle directory
-gradle/
-
 # Keystore files
 *.jks
 
