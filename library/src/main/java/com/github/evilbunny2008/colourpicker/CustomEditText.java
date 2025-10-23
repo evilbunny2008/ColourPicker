@@ -1,19 +1,24 @@
 package com.github.evilbunny2008.colourpicker;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CustomEditText extends TextInputEditText
 {
-	private OnColourPickedListener listener;
-	private char fixedChar = '#';
+	private static char fixedChar = '#';
+
+	public CustomEditText(Context context)
+	{
+		super(context);
+		init(context, null, 0);
+	}
 
 	public CustomEditText(Context context, AttributeSet attrs)
 	{
@@ -29,15 +34,49 @@ public class CustomEditText extends TextInputEditText
 
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
-		if(Common.isEmpty(getText()))
+		setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) ->
 		{
-			setText(String.valueOf(fixedChar));
-			setSelection(1); // cursor after fixed char
-		}
+			Common.LogMessage("InputFilter Line 70 source = " + source);
+			Common.LogMessage("InputFilter Line 71 start = " + start);
+			Common.LogMessage("InputFilter Line 72 end = " + end);
+			Common.LogMessage("InputFilter Line 73 dest = " + dest);
+			Common.LogMessage("InputFilter Line 74 dstart = " + dstart);
+			Common.LogMessage("InputFilter Line 75 dend = " + dend);
+
+			if(dstart >= 9 && dend >= 9)
+				return "";
+
+			String input = String.valueOf(dest.subSequence(0, dstart)) +
+					source.subSequence(start, end) +
+					dest.subSequence(dend, dest.length());
+			Common.LogMessage("InputFilter Line 73 input = " + input);
+			String output = filterString(input);
+			Common.LogMessage("InputFilter Line 75 output = " + output);
+
+			if(output.equals(input))
+				return null;
+
+			if(dstart == dend)
+			{
+				Common.LogMessage("InputFilter Line 82 new output.substring() = " + output.substring(dstart, dend + 1));
+				return output.substring(dstart, dend + 1);
+			}
+
+			if(dstart < dend)
+			{
+				Common.LogMessage("InputFilter Line 88 new output.substring() = " + output.substring(dstart, dend));
+				return output.substring(dstart, dend);
+			}
+
+			Common.LogMessage("InputFilter Line 92 new output = " + output);
+			return output;
+		}});
+
+		setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
 		addTextChangedListener(new TextWatcher()
 		{
-			boolean isUpdating = false;
+			private boolean isUpdating = false;
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after)
@@ -52,21 +91,30 @@ public class CustomEditText extends TextInputEditText
 			@Override
 			public void afterTextChanged(Editable s)
 			{
+				Common.LogMessage("afterTextChanged Line 156 s = " + s);
+
 				if(isUpdating)
 					return;
 
 				isUpdating = true;
 
-				// Ensure the first character is always the fixed char
-				if(s.length() == 0)
-					s.insert(0, String.valueOf(fixedChar));
-				else if(s.charAt(0) != fixedChar)
-					s.insert(0, String.valueOf(fixedChar));
+				String str = s.toString();
+				Common.LogMessage("afterTextChanged Line 164 str = " + str);
 
-				// Prevent cursor from going before fixed char
-				if(getSelectionStart() == 0)
-					setSelection(1);
+				str = str.replaceAll(String.valueOf(fixedChar), "");
+				Common.LogMessage("afterTextChanged Line 167 str = " + str);
+				str = fixedChar + str;
 
+				Common.LogMessage("afterTextChanged Line 170 str = " + str);
+
+				if(str.length() > 9)
+					str = str.substring(0, 9);
+
+				Common.LogMessage("afterTextChanged Line 175 str = " + str);
+
+				s.replace(0, s.length(), str);
+
+				Common.LogMessage("afterTextChanged Line 179 s = " + s);
 				isUpdating = false;
 			}
 		});
@@ -75,68 +123,47 @@ public class CustomEditText extends TextInputEditText
 	@Override
 	public void setText(CharSequence text, BufferType type)
 	{
-		String input = Common.to_ARGB_hex(text.toString());
-		Common.LogMessage("line100 input.length() = " + input.length());
-		Common.LogMessage("input padded = " + input);
+		String input = text.toString();
+		input = filterString(input);
+		Common.LogMessage("CustomEditText Line 189 input.length() = " + input.length());
+		Common.LogMessage("CustomEditText Line 190 input padded = " + input);
 		super.setText(input, type);
 	}
 
-	/** Optional: allow changing the fixed character */
+	public String filterString(String input)
+	{
+		if(input == null || input.isEmpty())
+			return fixedChar + "FFFFFFFF";
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(fixedChar);
+
+		input = input.replaceAll(String.valueOf(fixedChar), "").trim();
+		for(int i = 0; i < input.length(); i++)
+		{
+			char c = Character.toUpperCase(input.charAt(i));
+			if(Character.isDigit(c) || (c >= 'A' && c <= 'F'))
+				sb.append(c);
+		}
+
+		if(sb.length() > 9)
+			sb.setLength(9);
+
+		return sb.toString();
+	}
+
+	public static char getFixedChar()
+	{
+		return fixedChar;
+	}
+
 	public void setFixedChar(char c)
 	{
-		this.fixedChar = c;
-		Editable text = getText();
-		if (text != null && text.length() > 0)
-			text.replace(0, 1, String.valueOf(fixedChar));
-		else
-			setText(String.valueOf(fixedChar));
-
-		setSelection(1);
-	}
-
-	/** Returns the text without the fixed char */
-	public String getUserText()
-	{
-		Editable text = getText();
-		if(text == null || text.length() <= 1)
-			return "";
-
-		return text.subSequence(1, text.length()).toString();
-	}
-
-	public interface OnColourPickedListener
-	{
-		void onColourPicked(int colour, boolean isForeground);
-	}
-
-
-	public void setOnColourPickedListener(OnColourPickedListener listener)
-	{
-		this.listener = listener;
-	}
-
-	public void handleClick(View v)
-	{
-		Activity activity = Common.getActivity(v.getContext());
-		int colour = Common.parseHexToColour(getText() != null ? getText().toString() : "#FFFFFFFF");
-		ColourPicker cp = new ColourPicker(activity,
-				(colour >> 24) & 0xFF,
-				(colour >> 16) & 0xFF,
-				(colour >> 8) & 0xFF,
-				colour & 0xFF);
-
-		cp.setCallback(newColour ->
-		{
-			String hex = Common.to_ARGB_hex(String.format("%8X", newColour));
-			Common.LogMessage("Pure Hex: " + hex);
-			setText(hex);
-
-			if(listener != null)
-				listener.onColourPicked(newColour, true);
-
-			cp.dismiss();
-		});
-
-		cp.show();
+		int sel = getSelectionStart();
+		String str = String.valueOf(getText());
+		str = filterString(str);
+		setText(str);
+		if(sel == 0)
+			setSelection(1);
 	}
 }

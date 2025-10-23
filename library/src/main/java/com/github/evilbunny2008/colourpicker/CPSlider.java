@@ -5,8 +5,6 @@ import android.util.AttributeSet;
 
 import com.google.android.material.slider.Slider;
 
-import androidx.annotation.NonNull;
-
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CPSlider extends Slider
 {

@@ -2,21 +2,17 @@ package com.github.evilbunny2008.colourpicker;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.slider.Slider;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 /**
@@ -27,15 +23,18 @@ import androidx.annotation.NonNull;
  */
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
+public class ColourPicker extends Dialog implements CPSlider.OnChangeListener, CustomEditText.OnEditorActionListener
 {
 	private final Activity activity;
-	private @ColorInt int current_colour;
+	private OnTextChangedListener listener;
 
 	private View colourView;
 	private CPSlider alphaSeekBar, redSeekBar, greenSeekBar, blueSeekBar;
 	private CustomEditText hexCode;
-	private int alpha, red, green, blue;
+	private int alpha = 255;
+	private int red = 0;
+	private int green = 0;
+	private int blue = 0;
 
 	private Callback callback;
 
@@ -55,11 +54,6 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 		if(activity instanceof Callback)
 			callback = (Callback)activity;
 
-		this.alpha = 255;
-		this.red = 0;
-		this.green = 0;
-		this.blue = 0;
-
 		this.autoclose = false;
 	}
 
@@ -73,39 +67,10 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 	{
 		this(activity);
 
-		this.current_colour = colour;
-
 		this.alpha = Color.alpha(colour);
 		this.red = Color.red(colour);
 		this.green = Color.green(colour);
 		this.blue = Color.blue(colour);
-	}
-
-	/**
-	 * Creator of the class. It will initialize the class with the argb colour passed as default
-	 *
-	 * @param activity The reference to the activity where the colour picker is called
-	 * @param alpha    Alpha value (0 - 255)
-	 * @param red      Red colour for RGB values (0 - 255)
-	 * @param green    Green colour for RGB values (0 - 255)
-	 * @param blue     Blue colour for RGB values (0 - 255)
-	 * <p>
-	 *                 If the value of the colours it's not in the right range (0 - 255) it will
-	 *                 be place at 0.
-	 * @since v1.1.0
-	 */
-	public ColourPicker(Activity activity,
-	                   @IntRange(from = 0, to = 255) int alpha,
-	                   @IntRange(from = 0, to = 255) int red,
-	                   @IntRange(from = 0, to = 255) int green,
-	                   @IntRange(from = 0, to = 255) int blue)
-	{
-		this(activity);
-
-		this.alpha = FormatHelper.assertColourValueInRange(alpha);
-		this.red = FormatHelper.assertColourValueInRange(red);
-		this.green = FormatHelper.assertColourValueInRange(green);
-		this.blue = FormatHelper.assertColourValueInRange(blue);
 	}
 
 	/**
@@ -155,81 +120,45 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 		greenSeekBar.addOnChangeListener(this);
 		blueSeekBar.addOnChangeListener(this);
 
-		hexCode.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
-
-		hexCode.setOnEditorActionListener((v, actionId, event) ->
-		{
-			if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-					actionId == EditorInfo.IME_ACTION_DONE ||
-					event.getAction() == KeyEvent.ACTION_DOWN &&
-							event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
-			{
-				Editable tmp = hexCode.getText();
-				if(tmp == null)
-					return true;
-
-				updateColourView(hexCode.getText().toString());
-				InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
-
-				return true;
-			}
-
-			return false;
-		});
+		hexCode.setOnEditorActionListener(this);
 
 		final Button okColour = findViewById(R.id.okColourButton);
 		okColour.setOnClickListener(view -> sendColour());
 	}
 
 	@Override
-	public void onValueChange(@NonNull Slider slider, float value, boolean from_user)
+	public void show()
 	{
-		alpha = (int)alphaSeekBar.getValue();
-		red = (int)redSeekBar.getValue();
-		green = (int)greenSeekBar.getValue();
-		blue = (int)blueSeekBar.getValue();
+		super.show();
 
-		String hex = String.format("#%08X", getColour());
-		hexCode.setText(hex);
+		int colour = getColour();
+		String hex = Common.to_ARGB_hex(colour);
 
-		colourView.setBackgroundColor(getColour());
-	}
-
-	private void initUi()
-	{
-		colourView.setBackgroundColor(getColour());
+		colourView.setBackgroundColor(colour);
 
 		alphaSeekBar.setValue(alpha);
 		redSeekBar.setValue(red);
 		greenSeekBar.setValue(green);
 		blueSeekBar.setValue(blue);
 
-		String hex = FormatHelper.formatColourValues(alpha, red, green, blue);
-		hex = Common.to_ARGB_hex(hex);
 		hexCode.setText(hex);
 
-		Common.LogMessage("line203 Setting hexCode to " + hex);
+		Common.LogMessage("ColourPicker line 146 Setting hexCode to " + hex);
 	}
 
 	private void sendColour()
 	{
-		if(callback != null)
+		Editable edit = hexCode.getText();
+		if(edit != null)
 		{
-			String hex;
-			Editable edit = hexCode.getText();
-			if(edit == null || edit.length() <= 1)
-				hex = "#FF000000";
-			else
-				hex = edit.toString();
+			String hex = hexCode.filterString(edit.toString());
+			Common.LogMessage("ColourPicker line 183 Setting hexCode to " + hex);
+			if(callback != null)
+				callback.onColourChosen(hex);
 
-			hex = Common.to_ARGB_hex(hex);
-			final int colour = Color.parseColor(hex);
-			callback.onColourChosen(colour);
+			if(autoclose)
+				dismiss();
 		}
-
-		if(autoclose)
-			dismiss();
 	}
 
 	public void setColour(@ColorInt int colour)
@@ -240,28 +169,85 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 		blue = Color.blue(colour);
 	}
 
-	 // Method that synchronizes the colour between the bars, the view, and the HEX code text.
-	 // @param input HEX Code of the colour.
-	private void updateColourView(String colour)
+	@Override
+	public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
 	{
-		try
+		Common.LogMessage("setOnEditorActionListener()");
+
+		CharSequence tmp = textView.getText();
+		if(tmp == null)
+			return false;
+
+		String str = tmp.toString();
+		if(str.isEmpty())
+			return false;
+
+		str = hexCode.filterString(str);
+
+		Common.LogMessage("hexCode changed... hexCode = " + str);
+		updateText(str);
+		sendColour();
+		//dismiss();
+
+		return true;
+/*
+		if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+				actionId == EditorInfo.IME_ACTION_DONE ||
+				event.getAction() == KeyEvent.ACTION_DOWN &&
+						event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
 		{
-			int tmp_colour = (int)Long.parseLong(colour.substring(1), 16);
-			alpha = (tmp_colour >> 24) & 0xFF;
-			red = (tmp_colour >> 16) & 0xFF;
-			green = (tmp_colour >> 8) & 0xFF;
-			blue = (tmp_colour & 0xFF) & 0xFF;
 
-			colourView.setBackgroundColor(getColour());
 
-			alphaSeekBar.setValue(alpha);
-			redSeekBar.setValue(red);
-			greenSeekBar.setValue(green);
-			blueSeekBar.setValue(blue);
-		} catch (Exception e) {
-			hexCode.setError(e.toString());
+			onTextChanged(tmp.toString());
+			Common.LogMessage("hexCode changed... hexCode = " + tmp);
+			InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
+
+			return true;
+		}
+		return false;
+*/
+	}
+
+	private void updateText(String text)
+	{
+		if(listener != null)
+			listener.onTextChanged(text);
+	}
+
+	@Override
+	public void onValueChange(@NonNull Slider slider, float value, boolean from_user)
+	{
+		if(from_user)
+		{
+			alpha = (int)alphaSeekBar.getValue();
+			red = (int)redSeekBar.getValue();
+			green = (int)greenSeekBar.getValue();
+			blue = (int)blueSeekBar.getValue();
+
+			String hex = Common.to_ARGB_hex(getColour());
+			Common.LogMessage("ColourPicker line 194 Setting hexCode to " + hex);
+			hexCode.post(() -> hexCode.setText(hex));
+			colourView.post(() -> colourView.setBackgroundColor(getColour()));
 		}
 	}
+
+	public interface OnTextChangedListener
+	{
+		void onTextChanged(String colour);
+	}
+
+	public void setTextCallback(OnTextChangedListener listener)
+	{
+		this.listener = listener;
+	}
+
+	void onTextChanged(CharSequence text, int start, int before, int count)
+	{
+		if (listener != null)
+			listener.onTextChanged(text.toString());
+	}
+
 
 	/**
 	 * Getter for the ALPHA value of the ARGB selected colour
@@ -337,6 +323,11 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 		this.blue = blue;
 	}
 
+	public void setAll(@ColorInt int colour)
+	{
+		setAll(Color.alpha(colour), Color.red(colour), Color.green(colour), Color.blue(colour));
+	}
+
 	/**
 	 * Getter for the colour as Android Color class value.
 	 * <p>
@@ -351,12 +342,5 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener
 	public int getColour()
 	{
 		return Color.argb(alpha, red, green, blue);
-	}
-
-	@Override
-	public void show()
-	{
-		super.show();
-		initUi();
 	}
 }

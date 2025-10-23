@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
 	        android:valueFrom="0"
 	        android:valueTo="255"
+	        android:value="255"
 	        android:stepSize="1"
             android:maxHeight="3dip"
             android:minHeight="3dip" />

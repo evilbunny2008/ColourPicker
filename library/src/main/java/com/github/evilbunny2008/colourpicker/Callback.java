@@ -1,7 +1,5 @@
 package com.github.evilbunny2008.colourpicker;
 
-import androidx.annotation.ColorInt;
-
 /**
  * Created by Patrick Geselbracht on 2017-03-04
  *
@@ -18,5 +16,5 @@ public interface Callback
 	 * @param colour Colour chosen
 	 */
 
-	void onColourChosen(@ColorInt int colour);
+	void onColourChosen(String colour);
 }

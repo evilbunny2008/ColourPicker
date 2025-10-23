@@ -6,12 +6,11 @@ import android.content.ContextWrapper;
 import android.text.Editable;
 import android.util.Log;
 
-@SuppressWarnings({"unused","SameParameterValue", "FieldCanBeLocal"})
-class Common
+@SuppressWarnings({"unused","SameParameterValue", "FieldCanBeLocal", "CallToPrintStackTrace"})
+public class Common
 {
-	static final private boolean debug_on = true;
+	static final private boolean debug_on = false;
 
-	/** @noinspection CallToPrintStackTrace*/
 	static void doStackOutput(Exception e)
 	{
 		e.printStackTrace();
@@ -55,7 +54,7 @@ class Common
 	{
 		try
 		{
-			return (int)Long.parseLong(text.replace("#", ""), 16);
+			return (int)Long.parseLong(text.replaceAll(String.valueOf(CustomEditText.getFixedChar()), ""), 16);
 		} catch (Exception e) {
 			return 0xFFFFFFFF;
 		}
@@ -65,13 +64,23 @@ class Common
 	 * Convert arbitrary hex input into normalized #AARRGGBB string.
 	 * Default alpha is FF when missing.
 	 */
+	public static String to_ARGB_hex(int colour)
+	{
+		String hex = String.format("#%08X", colour);
+		return to_ARGB_hex(hex);
+	}
+
 	public static String to_ARGB_hex(String input)
 	{
-		if(input == null)
-			return "#FF000000";
+		LogMessage("Common Line70 s = " + input, true);
 
-		String s = input.replaceAll("#", "").trim().toUpperCase();
+		if(input.isEmpty())
+			return CustomEditText.getFixedChar() + "FF000000";
+
+		String s = input.replaceAll(String.valueOf(CustomEditText.getFixedChar()), "").trim().toUpperCase();
 		s = s.replaceAll("[^0-9A-F]", ""); // keep only hex digits
+
+		LogMessage("Common Line78 s = " + s, true);
 
 		switch (s.length())
 		{
@@ -100,7 +109,9 @@ class Common
 				break;
 		}
 
-		return "#" + s;
+		s = CustomEditText.getFixedChar() + s;
+		LogMessage("Common Line 108 s = " + s, true);
+		return s;
 	}
 
 	/** Helper: expand 4-digit shorthand RGBA into 8-digit AARRGGBB */
