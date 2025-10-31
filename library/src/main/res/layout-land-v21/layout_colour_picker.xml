@@ -24,7 +24,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
-        <com.github.evilbunny2008.colourpicker.CPSlider
+        <com.google.android.material.slider.Slider
             android:id="@+id/alphaSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
 	        android:minHeight="3dip"
 	        style="@style/Widget.App.Material3.Slider.Alpha" />
 
-        <com.github.evilbunny2008.colourpicker.CPSlider
+        <com.google.android.material.slider.Slider
             android:id="@+id/redSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
 	        android:minHeight="3dip"
 	        style="@style/Widget.App.Material3.Slider.Red" />
 
-        <com.github.evilbunny2008.colourpicker.CPSlider
+        <com.google.android.material.slider.Slider
             android:id="@+id/greenSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 	        android:minHeight="3dip"
 	        style="@style/Widget.App.Material3.Slider.Green" />
 
-        <com.github.evilbunny2008.colourpicker.CPSlider
+        <com.google.android.material.slider.Slider
             android:id="@+id/blueSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -74,10 +74,12 @@
 
 	    <LinearLayout style="@style/Widget.LinearLayout">
 		    <com.google.android.material.textfield.TextInputLayout
-			    style="@style/Widget.TextView">
+			    style="@style/Widget.TextView"
+			    android:gravity="start">
 			    <com.github.evilbunny2008.colourpicker.CustomEditText
 				    style="@style/Widget.CustomEditText"
 				    android:id="@+id/hexCode"
+				    android:gravity="start"
 				    tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 		    </com.google.android.material.textfield.TextInputLayout>
 

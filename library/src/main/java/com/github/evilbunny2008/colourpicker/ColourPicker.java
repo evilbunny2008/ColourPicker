@@ -23,13 +23,13 @@ import androidx.annotation.NonNull;
  */
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
-public class ColourPicker extends Dialog implements CPSlider.OnChangeListener, CustomEditText.OnEditorActionListener
+public class ColourPicker extends Dialog implements Slider.OnChangeListener, CustomEditText.OnEditorActionListener
 {
 	private final Activity activity;
 	private OnTextChangedListener listener;
 
 	private View colourView;
-	private CPSlider alphaSeekBar, redSeekBar, greenSeekBar, blueSeekBar;
+	private Slider alphaSeekBar, redSeekBar, greenSeekBar, blueSeekBar;
 	private CustomEditText hexCode;
 	private int alpha = 255;
 	private int red = 0;
@@ -187,26 +187,11 @@ public class ColourPicker extends Dialog implements CPSlider.OnChangeListener, C
 		Common.LogMessage("hexCode changed... hexCode = " + str);
 		updateText(str);
 		sendColour();
-		//dismiss();
+
+		if(autoclose)
+			dismiss();
 
 		return true;
-/*
-		if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-				actionId == EditorInfo.IME_ACTION_DONE ||
-				event.getAction() == KeyEvent.ACTION_DOWN &&
-						event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
-		{
-
-
-			onTextChanged(tmp.toString());
-			Common.LogMessage("hexCode changed... hexCode = " + tmp);
-			InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(hexCode.getWindowToken(), 0);
-
-			return true;
-		}
-		return false;
-*/
 	}
 
 	private void updateText(String text)

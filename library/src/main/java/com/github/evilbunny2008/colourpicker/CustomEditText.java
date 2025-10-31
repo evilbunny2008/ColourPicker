@@ -12,6 +12,7 @@ import com.google.android.material.textfield.TextInputEditText;
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CustomEditText extends TextInputEditText
 {
+	private boolean isUpdating = false;
 	private static char fixedChar = '#';
 
 	public CustomEditText(Context context)
@@ -34,6 +35,17 @@ public class CustomEditText extends TextInputEditText
 
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
+		moveSelector();
+
+		setOnTouchListener((v, event) ->
+		{
+			moveSelector();
+			v.performClick();
+			return false;
+		});
+
+		setOnFocusChangeListener((v, hasFocus) -> moveSelector());
+
 		setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) ->
 		{
 			Common.LogMessage("InputFilter Line 70 source = " + source);
@@ -76,8 +88,6 @@ public class CustomEditText extends TextInputEditText
 
 		addTextChangedListener(new TextWatcher()
 		{
-			private boolean isUpdating = false;
-
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after)
 			{
@@ -116,12 +126,48 @@ public class CustomEditText extends TextInputEditText
 
 				Common.LogMessage("afterTextChanged Line 179 s = " + s);
 
-				if(s.length() > 0 && getSelectionStart() == 0)
-					setSelection(1);
-
 				isUpdating = false;
+
+				moveSelector();
 			}
 		});
+	}
+
+	private void moveSelector()
+	{
+		if(isUpdating)
+			return;
+
+		isUpdating = true;
+
+		if(getText() == null || getText().length() == 0)
+			setText("#");
+
+		if(getSelectionStart() == 0)
+			setSelection(1);
+
+		isUpdating = false;
+	}
+
+	@Override
+	public void setSelection(int index)
+	{
+		if(index == 0)
+			index = 1;
+
+		super.setSelection(index);
+	}
+
+	@Override
+	public void setSelection(int start, int stop)
+	{
+		if(start == 0)
+			start = 1;
+
+		if(stop == 0)
+			stop = 1;
+
+		super.setSelection(start, stop);
 	}
 
 	@Override
@@ -167,7 +213,6 @@ public class CustomEditText extends TextInputEditText
 		String str = String.valueOf(getText());
 		str = filterString(str);
 		setText(str);
-		if(sel == 0)
-			setSelection(1);
+		moveSelector();
 	}
 }
