@@ -37,15 +37,6 @@ public class CustomEditText extends TextInputEditText
 	{
 		moveSelector();
 
-		setOnTouchListener((v, event) ->
-		{
-			moveSelector();
-			v.performClick();
-			return false;
-		});
-
-		setOnFocusChangeListener((v, hasFocus) -> moveSelector());
-
 		setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) ->
 		{
 			Common.LogMessage("InputFilter Line 70 source = " + source);
