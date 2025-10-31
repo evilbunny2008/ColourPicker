@@ -72,7 +72,7 @@ public class Common
 
 	public static String to_ARGB_hex(String input)
 	{
-		LogMessage("Common Line70 s = " + input, true);
+		LogMessage("Common Line70 s = " + input);
 
 		if(input.isEmpty())
 			return CustomEditText.getFixedChar() + "FF000000";
@@ -80,7 +80,7 @@ public class Common
 		String s = input.replaceAll(String.valueOf(CustomEditText.getFixedChar()), "").trim().toUpperCase();
 		s = s.replaceAll("[^0-9A-F]", ""); // keep only hex digits
 
-		LogMessage("Common Line78 s = " + s, true);
+		LogMessage("Common Line78 s = " + s);
 
 		switch (s.length())
 		{
@@ -110,7 +110,7 @@ public class Common
 		}
 
 		s = CustomEditText.getFixedChar() + s;
-		LogMessage("Common Line 108 s = " + s, true);
+		LogMessage("Common Line 108 s = " + s);
 		return s;
 	}
 

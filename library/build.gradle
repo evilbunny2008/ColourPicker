@@ -10,7 +10,7 @@ afterEvaluate {
 				from components.release
 				groupId = 'com.github.evilbunny2008'
 				artifactId = 'ColourPicker'
-				version = '2.0.13'
+				version = '2.0.14'
 			}
 		}
 	}
@@ -21,8 +21,8 @@ android {
 	defaultConfig {
 		minSdk = 24
 		targetSdk = 36
-		version = "2.0.13"
-		versionCode = 2000013
+		version = "2.0.14"
+		versionCode = 2000014
 	}
 
 	buildTypes {

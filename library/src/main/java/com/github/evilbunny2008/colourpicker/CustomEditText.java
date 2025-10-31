@@ -115,6 +115,10 @@ public class CustomEditText extends TextInputEditText
 				s.replace(0, s.length(), str);
 
 				Common.LogMessage("afterTextChanged Line 179 s = " + s);
+
+				if(s.length() > 0 && getSelectionStart() == 0)
+					setSelection(1);
+
 				isUpdating = false;
 			}
 		});
