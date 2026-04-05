@@ -8,9 +8,11 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.autofill.AutofillValue;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import androidx.annotation.RequiresApi;
 
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
 
@@ -44,12 +46,12 @@ public class CustomEditText extends TextInputEditText
 
 		setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) ->
 		{
-			LogMessage("InputFilter Line 70 source = " + source);
-			LogMessage("InputFilter Line 71 start = " + start);
-			LogMessage("InputFilter Line 72 end = " + end);
-			LogMessage("InputFilter Line 73 dest = " + dest);
-			LogMessage("InputFilter Line 74 dstart = " + dstart);
-			LogMessage("InputFilter Line 75 dend = " + dend);
+			LogMessage("CustomEditText InputFilter Line 70 source = " + source);
+			LogMessage("CustomEditText InputFilter Line 71 start = " + start);
+			LogMessage("CustomEditText InputFilter Line 72 end = " + end);
+			LogMessage("CustomEditText InputFilter Line 73 dest = " + dest);
+			LogMessage("CustomEditText InputFilter Line 74 dstart = " + dstart);
+			LogMessage("CustomEditText InputFilter Line 75 dend = " + dend);
 
 			if(dstart >= 9 && dend >= 9)
 				return "";
@@ -57,26 +59,26 @@ public class CustomEditText extends TextInputEditText
 			String input = String.valueOf(dest.subSequence(0, dstart)) +
 					source.subSequence(start, end) +
 					dest.subSequence(dend, dest.length());
-			LogMessage("InputFilter Line 73 input = " + input);
+			LogMessage("CustomEditText InputFilter Line 73 input = " + input);
 			String output = filterString(input);
-			LogMessage("InputFilter Line 75 output = " + output);
+			LogMessage("CustomEditText InputFilter Line 75 output = " + output);
 
 			if(output.equals(input))
 				return null;
 
 			if(dstart == dend)
 			{
-				LogMessage("InputFilter Line 82 new output.substring() = " + output.substring(dstart, dend + 1));
+				LogMessage("CustomEditText InputFilter Line 82 new output.substring() = " + output.substring(dstart, dend + 1));
 				return output.substring(dstart, dend + 1);
 			}
 
 			if(dstart < dend)
 			{
-				LogMessage("InputFilter Line 88 new output.substring() = " + output.substring(dstart, dend));
+				LogMessage("CustomEditText InputFilter Line 88 new output.substring() = " + output.substring(dstart, dend));
 				return output.substring(dstart, dend);
 			}
 
-			LogMessage("InputFilter Line 92 new output = " + output);
+			LogMessage("CustomEditText InputFilter Line 92 new output = " + output);
 			return output;
 		}});
 
@@ -100,7 +102,7 @@ public class CustomEditText extends TextInputEditText
 			@Override
 			public void afterTextChanged(Editable s)
 			{
-				LogMessage("afterTextChanged Line 156 s = " + s);
+				LogMessage("CustomEditText afterTextChanged Line 156 s = " + s);
 
 				if(isUpdating)
 					return;
@@ -108,22 +110,22 @@ public class CustomEditText extends TextInputEditText
 				isUpdating = true;
 
 				String str = s.toString();
-				LogMessage("afterTextChanged Line 164 str = " + str);
+				LogMessage("CustomEditText afterTextChanged Line 164 str = " + str);
 
 				str = str.replaceAll(String.valueOf(fixedChar), "");
-				LogMessage("afterTextChanged Line 167 str = " + str);
+				LogMessage("CustomEditText afterTextChanged Line 167 str = " + str);
 				str = fixedChar + str;
 
-				LogMessage("afterTextChanged Line 170 str = " + str);
+				LogMessage("CustomEditText afterTextChanged Line 170 str = " + str);
 
 				if(str.length() > 9)
 					str = str.substring(0, 9);
 
-				LogMessage("afterTextChanged Line 175 str = " + str);
+				LogMessage("CustomEditText afterTextChanged Line 175 str = " + str);
 
 				s.replace(0, s.length(), str);
 
-				LogMessage("afterTextChanged Line 179 s = " + s);
+				LogMessage("CustomEditText afterTextChanged Line 179 s = " + s);
 
 				isUpdating = false;
 
@@ -213,5 +215,18 @@ public class CustomEditText extends TextInputEditText
 		str = filterString(str);
 		setText(str);
 		moveSelector();
+	}
+
+	@Override
+	public void autofill(AutofillValue value)
+	{
+	    // do nothing
+	}
+
+	@RequiresApi(api=Build.VERSION_CODES.O)
+	@Override
+	public int getAutofillType()
+	{
+	    return View.AUTOFILL_TYPE_NONE;
 	}
 }
