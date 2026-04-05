@@ -14,11 +14,11 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
 
-@SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
+@SuppressWarnings({"unused"})
 public class CustomEditText extends TextInputEditText
 {
 	private boolean isUpdating = false;
-	private static char fixedChar = '#';
+	private static final char fixedChar = '#';
 
 	public CustomEditText(Context context)
 	{

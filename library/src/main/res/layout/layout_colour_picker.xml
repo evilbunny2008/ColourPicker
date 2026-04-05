@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
 	android:theme="@style/AppTheme"
 	tools:context=".CPEditText">
 
     <View
         android:id="@+id/colourView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="150dp"
+        android:elevation="2dp"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,52 +24,53 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <com.google.android.material.slider.Slider
-	        style="@style/Widget.App.Material3.Slider.Alpha"
             android:id="@+id/alphaSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
 	        android:valueFrom="0"
 	        android:valueTo="255"
 	        android:value="255"
 	        android:stepSize="1"
-            android:maxHeight="3dip"
-            android:minHeight="3dip" />
+	        android:maxHeight="3dip"
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Alpha" />
 
         <com.google.android.material.slider.Slider
-	        style="@style/Widget.App.Material3.Slider.Red"
-	        android:id="@+id/redSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/alphaSeekBar"
+            android:id="@+id/redSeekBar"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/alphaSeekBar"
 	        android:valueFrom="0"
 	        android:valueTo="255"
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip" />
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Red" />
 
         <com.google.android.material.slider.Slider
-	        style="@style/Widget.App.Material3.Slider.Green"
             android:id="@+id/greenSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/redSeekBar"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/redSeekBar"
 	        android:valueFrom="0"
 	        android:valueTo="255"
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip" />
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Green" />
 
         <com.google.android.material.slider.Slider
-	        style="@style/Widget.App.Material3.Slider.Blue"
             android:id="@+id/blueSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/greenSeekBar"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/greenSeekBar"
 	        android:valueFrom="0"
 	        android:valueTo="255"
+
 	        android:stepSize="1"
 	        android:maxHeight="3dip"
-	        android:minHeight="3dip" />
+	        android:minHeight="3dip"
+	        style="@style/Widget.App.Material3.Slider.Blue" />
 
 	    <LinearLayout style="@style/Widget.LinearLayout">
 		    <com.google.android.material.textfield.TextInputLayout

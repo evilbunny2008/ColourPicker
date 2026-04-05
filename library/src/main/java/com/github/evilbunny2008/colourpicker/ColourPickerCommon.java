@@ -6,7 +6,7 @@ import android.content.ContextWrapper;
 import android.text.Editable;
 import android.util.Log;
 
-@SuppressWarnings({"unused","SameParameterValue", "FieldCanBeLocal", "CallToPrintStackTrace"})
+@SuppressWarnings({"unused", "SameParameterValue", "CallToPrintStackTrace"})
 public class ColourPickerCommon
 {
 	static final private boolean debug_on = false;

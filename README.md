@@ -59,7 +59,7 @@ implementation 'com.github.evilbunny2008:ColourPicker:2.0.12'
 
 ### How to add a widget to a layout
 
-Open up a xml layout and add a CPEditText widget, note that because ColourPicker is now based on Material3 widgets you need to declare CPEditText inside a TextInputLayout widget:
+Open up a XML layout and add a CPEditText widget, note that because ColourPicker is now based on Material3 widgets you need to declare CPEditText inside a TextInputLayout widget:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

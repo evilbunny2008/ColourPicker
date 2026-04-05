@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="btnSelectColour">Pile</string>
-    <string name="pick_a_colour">Pilei se’re koro’bang</string>
+    <string name="pick_a_colour">Pilei se\'re warna</string>
 </resources>

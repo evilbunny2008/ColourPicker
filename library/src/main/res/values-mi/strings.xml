@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="btnSelectColour">Whiriwhiri</string>
-    <string name="pick_a_colour">Whiriwhiria he tae</string>
+    <string name="btnSelectColour">Tīpakohia</string>
+    <string name="pick_a_colour">Tīpakohia he Tae</string>
 </resources>
