@@ -1,7 +1,7 @@
 This project has been forked as the original project is no longer maintained, not only has it been updated to SDK36 but now has custom widgets to put most of the logic in the library itself.
 
 # ColourPicker EditText
-A simple, minimalistic and beautiful dialog color picker for Android 4.1+ devices. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
+A simple, minimalistic and beautiful dialog color picker for Android "Nougat" 7+/SDK24+. This color picker is easy-to-use and easy-to-integrate in your application to let users of your app choose color in a simple way.
 
 Features
 - Get Hex and (A)RGB color codes
