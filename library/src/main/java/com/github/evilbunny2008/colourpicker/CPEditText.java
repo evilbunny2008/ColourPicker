@@ -6,7 +6,11 @@ import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import static com.github.evilbunny2008.colourpicker.Common.parseHexToColour;
+
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.getActivity;
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.parseHexToColour;
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.to_ARGB_hex;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CPEditText extends CustomEditText implements CustomEditText.OnClickListener
@@ -41,35 +45,35 @@ public class CPEditText extends CustomEditText implements CustomEditText.OnClick
 	@Override
 	public void onClick(View view)
 	{
-		Common.LogMessage("CPEditText getText() = " + getText());
+		LogMessage("CPEditText getText() = " + getText());
 		String colour;
 		Editable text = getText();
-		Common.LogMessage("text.toString() = " + text);
+		LogMessage("text.toString() = " + text);
 		if(text == null || text.length() == 0)
 			colour = getFixedChar() + "FFFFFFFF";
 		else
 			colour = getFixedChar() + text.toString().replaceAll(String.valueOf(getFixedChar()), "").trim();
 
-		Common.LogMessage("CPEditText.onClick() Line 47 Colour: " + colour);
+		LogMessage("CPEditText.onClick() Line 47 Colour: " + colour);
 
-		String hex = Common.to_ARGB_hex(colour);
-		Common.LogMessage("CPEditText.onClick() Line 50 Hex: " + hex);
+		String hex = to_ARGB_hex(colour);
+		LogMessage("CPEditText.onClick() Line 50 Hex: " + hex);
 
-		Activity activity = Common.getActivity(view.getContext());
+		Activity activity = getActivity(view.getContext());
 		if(cp == null)
 		{
 			cp = new ColourPicker(activity, parseHexToColour(colour));
 
 			cp.setCallback(newColour ->
 			{
-				Common.LogMessage("cp.setCallback() Line 53 Pure Hex: " + newColour);
+				LogMessage("cp.setCallback() Line 53 Pure Hex: " + newColour);
 				setText(newColour);
 				cp.dismiss();
 			});
 
 			cp.setTextCallback(newColour ->
 			{
-				Common.LogMessage("cp.setTextCallback() Line 60 Pure Hex: " + newColour);
+				LogMessage("cp.setTextCallback() Line 60 Pure Hex: " + newColour);
 				setText(newColour);
 				cp.dismiss();
 			});

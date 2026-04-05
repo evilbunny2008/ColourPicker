@@ -15,6 +15,10 @@ import com.google.android.material.slider.Slider;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.to_ARGB_hex;
+
 /**
  * This is the only class of the project. It consists in a custom dialog that shows the GUI
  * used for choosing a colour using three sliders or an input field.
@@ -132,7 +136,7 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 		super.show();
 
 		int colour = getColour();
-		String hex = Common.to_ARGB_hex(colour);
+		String hex = to_ARGB_hex(colour);
 
 		colourView.setBackgroundColor(colour);
 
@@ -143,7 +147,7 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 
 		hexCode.setText(hex);
 
-		Common.LogMessage("ColourPicker line 146 Setting hexCode to " + hex);
+		LogMessage("ColourPicker line 146 Setting hexCode to " + hex);
 	}
 
 	private void sendColour()
@@ -152,7 +156,7 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 		if(edit != null)
 		{
 			String hex = hexCode.filterString(edit.toString());
-			Common.LogMessage("ColourPicker line 183 Setting hexCode to " + hex);
+			LogMessage("ColourPicker line 183 Setting hexCode to " + hex);
 			if(callback != null)
 				callback.onColourChosen(hex);
 
@@ -172,7 +176,7 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 	@Override
 	public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent)
 	{
-		Common.LogMessage("setOnEditorActionListener()");
+		LogMessage("setOnEditorActionListener()");
 
 		CharSequence tmp = textView.getText();
 		if(tmp == null)
@@ -184,7 +188,7 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 
 		str = hexCode.filterString(str);
 
-		Common.LogMessage("hexCode changed... hexCode = " + str);
+		LogMessage("hexCode changed... hexCode = " + str);
 		updateText(str);
 		sendColour();
 
@@ -210,8 +214,8 @@ public class ColourPicker extends Dialog implements Slider.OnChangeListener, Cus
 			green = (int)greenSeekBar.getValue();
 			blue = (int)blueSeekBar.getValue();
 
-			String hex = Common.to_ARGB_hex(getColour());
-			Common.LogMessage("ColourPicker line 194 Setting hexCode to " + hex);
+			String hex = to_ARGB_hex(getColour());
+			LogMessage("ColourPicker line 194 Setting hexCode to " + hex);
 			hexCode.post(() -> hexCode.setText(hex));
 			colourView.post(() -> colourView.setBackgroundColor(getColour()));
 		}

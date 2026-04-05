@@ -7,7 +7,7 @@ import android.text.Editable;
 import android.util.Log;
 
 @SuppressWarnings({"unused","SameParameterValue", "FieldCanBeLocal", "CallToPrintStackTrace"})
-public class Common
+public class ColourPickerCommon
 {
 	static final private boolean debug_on = false;
 
@@ -72,7 +72,7 @@ public class Common
 
 	public static String to_ARGB_hex(String input)
 	{
-		LogMessage("Common Line70 s = " + input);
+		LogMessage("ColourPickerCommon Line70 s = " + input);
 
 		if(input.isEmpty())
 			return CustomEditText.getFixedChar() + "FF000000";
@@ -80,7 +80,7 @@ public class Common
 		String s = input.replaceAll(String.valueOf(CustomEditText.getFixedChar()), "").trim().toUpperCase();
 		s = s.replaceAll("[^0-9A-F]", ""); // keep only hex digits
 
-		LogMessage("Common Line78 s = " + s);
+		LogMessage("ColourPickerCommon Line78 s = " + s);
 
 		switch (s.length())
 		{
@@ -110,7 +110,7 @@ public class Common
 		}
 
 		s = CustomEditText.getFixedChar() + s;
-		LogMessage("Common Line 108 s = " + s);
+		LogMessage("ColourPickerCommon Line 108 s = " + s);
 		return s;
 	}
 

@@ -1,13 +1,18 @@
 package com.github.evilbunny2008.colourpicker;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.View;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+
+import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
 
 @SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
 public class CustomEditText extends TextInputEditText
@@ -39,12 +44,12 @@ public class CustomEditText extends TextInputEditText
 
 		setFilters(new InputFilter[] {(source, start, end, dest, dstart, dend) ->
 		{
-			Common.LogMessage("InputFilter Line 70 source = " + source);
-			Common.LogMessage("InputFilter Line 71 start = " + start);
-			Common.LogMessage("InputFilter Line 72 end = " + end);
-			Common.LogMessage("InputFilter Line 73 dest = " + dest);
-			Common.LogMessage("InputFilter Line 74 dstart = " + dstart);
-			Common.LogMessage("InputFilter Line 75 dend = " + dend);
+			LogMessage("InputFilter Line 70 source = " + source);
+			LogMessage("InputFilter Line 71 start = " + start);
+			LogMessage("InputFilter Line 72 end = " + end);
+			LogMessage("InputFilter Line 73 dest = " + dest);
+			LogMessage("InputFilter Line 74 dstart = " + dstart);
+			LogMessage("InputFilter Line 75 dend = " + dend);
 
 			if(dstart >= 9 && dend >= 9)
 				return "";
@@ -52,30 +57,33 @@ public class CustomEditText extends TextInputEditText
 			String input = String.valueOf(dest.subSequence(0, dstart)) +
 					source.subSequence(start, end) +
 					dest.subSequence(dend, dest.length());
-			Common.LogMessage("InputFilter Line 73 input = " + input);
+			LogMessage("InputFilter Line 73 input = " + input);
 			String output = filterString(input);
-			Common.LogMessage("InputFilter Line 75 output = " + output);
+			LogMessage("InputFilter Line 75 output = " + output);
 
 			if(output.equals(input))
 				return null;
 
 			if(dstart == dend)
 			{
-				Common.LogMessage("InputFilter Line 82 new output.substring() = " + output.substring(dstart, dend + 1));
+				LogMessage("InputFilter Line 82 new output.substring() = " + output.substring(dstart, dend + 1));
 				return output.substring(dstart, dend + 1);
 			}
 
 			if(dstart < dend)
 			{
-				Common.LogMessage("InputFilter Line 88 new output.substring() = " + output.substring(dstart, dend));
+				LogMessage("InputFilter Line 88 new output.substring() = " + output.substring(dstart, dend));
 				return output.substring(dstart, dend);
 			}
 
-			Common.LogMessage("InputFilter Line 92 new output = " + output);
+			LogMessage("InputFilter Line 92 new output = " + output);
 			return output;
 		}});
 
 		setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+			setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
 
 		addTextChangedListener(new TextWatcher()
 		{
@@ -92,7 +100,7 @@ public class CustomEditText extends TextInputEditText
 			@Override
 			public void afterTextChanged(Editable s)
 			{
-				Common.LogMessage("afterTextChanged Line 156 s = " + s);
+				LogMessage("afterTextChanged Line 156 s = " + s);
 
 				if(isUpdating)
 					return;
@@ -100,22 +108,22 @@ public class CustomEditText extends TextInputEditText
 				isUpdating = true;
 
 				String str = s.toString();
-				Common.LogMessage("afterTextChanged Line 164 str = " + str);
+				LogMessage("afterTextChanged Line 164 str = " + str);
 
 				str = str.replaceAll(String.valueOf(fixedChar), "");
-				Common.LogMessage("afterTextChanged Line 167 str = " + str);
+				LogMessage("afterTextChanged Line 167 str = " + str);
 				str = fixedChar + str;
 
-				Common.LogMessage("afterTextChanged Line 170 str = " + str);
+				LogMessage("afterTextChanged Line 170 str = " + str);
 
 				if(str.length() > 9)
 					str = str.substring(0, 9);
 
-				Common.LogMessage("afterTextChanged Line 175 str = " + str);
+				LogMessage("afterTextChanged Line 175 str = " + str);
 
 				s.replace(0, s.length(), str);
 
-				Common.LogMessage("afterTextChanged Line 179 s = " + s);
+				LogMessage("afterTextChanged Line 179 s = " + s);
 
 				isUpdating = false;
 
@@ -166,8 +174,8 @@ public class CustomEditText extends TextInputEditText
 	{
 		String input = text.toString();
 		input = filterString(input);
-		Common.LogMessage("CustomEditText Line 189 input.length() = " + input.length());
-		Common.LogMessage("CustomEditText Line 190 input padded = " + input);
+		LogMessage("CustomEditText Line 189 input.length() = " + input.length());
+		LogMessage("CustomEditText Line 190 input padded = " + input);
 		super.setText(input, type);
 	}
 
