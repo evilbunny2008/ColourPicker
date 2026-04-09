@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.getActivity;
@@ -36,6 +37,7 @@ public class CPEditText extends CustomEditText implements CustomEditText.OnClick
 	public void init(Context context, AttributeSet attrs, int defStyleAttr)
 	{
 		super.init(context, attrs, defStyleAttr);
+		setContentDescription("Colour Picket Custom EditText");
 		setOnClickListener(this);
 	}
 
@@ -79,6 +81,15 @@ public class CPEditText extends CustomEditText implements CustomEditText.OnClick
 		}
 
 		cp.show();
+	}
+
+	@Override
+	public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info)
+	{
+	    super.onInitializeAccessibilityNodeInfo(info);
+	    info.setClassName(CPEditText.class.getName());
+	    info.setContentDescription("Colour Picket Custom EditText");
+	    info.setClickable(true);
 	}
 
 	@Override
