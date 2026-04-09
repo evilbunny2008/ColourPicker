@@ -26,7 +26,7 @@ import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.to_ARGB_h
  * @author Simone Pessotto
  */
 
-@SuppressWarnings({"unused","FieldMayBeFinal", "FieldCanBeLocal"})
+@SuppressWarnings({"unused", "FieldMayBeFinal", "FieldCanBeLocal"})
 public class ColourPicker extends Dialog implements Slider.OnChangeListener, CustomEditText.OnEditorActionListener
 {
 	private final Activity activity;
