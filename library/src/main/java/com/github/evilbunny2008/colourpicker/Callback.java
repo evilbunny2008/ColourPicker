@@ -6,7 +6,6 @@ package com.github.evilbunny2008.colourpicker;
  * @author Patrick Geselbracht
  */
 
-@SuppressWarnings("unused")
 public interface Callback
 {
 	/**

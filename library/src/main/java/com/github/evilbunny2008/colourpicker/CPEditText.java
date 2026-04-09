@@ -6,16 +6,13 @@ import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.View;
 
-
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.LogMessage;
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.getActivity;
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.parseHexToColour;
 import static com.github.evilbunny2008.colourpicker.ColourPickerCommon.to_ARGB_hex;
 
-@SuppressWarnings({"unused"})
 public class CPEditText extends CustomEditText implements CustomEditText.OnClickListener
 {
-	private static int colour;
 	private ColourPicker cp;
 
 	public CPEditText(Context context)
@@ -82,5 +79,12 @@ public class CPEditText extends CustomEditText implements CustomEditText.OnClick
 		}
 
 		cp.show();
+	}
+
+	@Override
+	public boolean performClick()
+	{
+	    super.performClick();
+	    return true;
 	}
 }

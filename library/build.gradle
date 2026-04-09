@@ -10,7 +10,7 @@ afterEvaluate {
 				from components.release
 				groupId = 'com.github.evilbunny2008'
 				artifactId = 'ColourPicker'
-				version = '2.0.20'
+				version = '2.0.21'
 			}
 		}
 	}
@@ -21,8 +21,8 @@ android {
 	defaultConfig {
 		minSdk = 24
 		targetSdk = 37
-		version = "2.0.20"
-		versionCode = 2000020
+		version = '2.0.21'
+		versionCode = 2000021
 	}
 
 	buildTypes {
@@ -47,7 +47,7 @@ android {
 	}
 
 	publishing {
-		singleVariant("release") {
+		singleVariant('release') {
 			withSourcesJar()
 		}
 	}
@@ -56,8 +56,8 @@ android {
 }
 
 dependencies {
-	implementation fileTree(include: ["*.jar"], dir: "libs")
-	implementation("com.google.android.material:material:1.13.0")
+	implementation fileTree(include: ['*.jar'], dir: 'libs')
+	implementation('com.google.android.material:material:1.13.0')
 }
 
 tasks.withType(Test).configureEach {

@@ -42,7 +42,7 @@ public class ColourPickerCommon
 		while(context instanceof android.content.ContextWrapper)
 		{
 			if(context instanceof Activity)
-				return (Activity) context;
+				return (Activity)context;
 
 			context = ((ContextWrapper)context).getBaseContext();
 		}
