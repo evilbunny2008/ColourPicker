@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="btnSelectColour">Selecta</string>
+    <string name="btnSelectColour">Selectați</string>
     <string name="pick_a_colour">Alegeți o culoare</string>
 </resources>

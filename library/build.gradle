@@ -10,7 +10,7 @@ afterEvaluate {
 				from components.release
 				groupId = 'com.github.evilbunny2008'
 				artifactId = 'ColourPicker'
-				version = '2.0.25'
+				version = '2.0.26'
 			}
 		}
 	}
@@ -21,20 +21,9 @@ android {
 	defaultConfig {
 		minSdk = 24
 		targetSdk = 37
-		version = '2.0.25'
-		versionCode = 2000025
-	}
-
-	buildTypes {
-		release {
-			minifyEnabled = false
-			shrinkResources = false
-		}
-
-		debug {
-			minifyEnabled = false
-			shrinkResources = false
-		}
+		version = '2.0.26'
+		versionCode = 2000026
+		consumerProguardFiles("consumer-rules.pro")
 	}
 
 	compileOptions {
@@ -49,6 +38,12 @@ android {
 	publishing {
 		singleVariant('release') {
 			withSourcesJar()
+		}
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled = false
 		}
 	}
 
