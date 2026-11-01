@@ -10,19 +10,19 @@ afterEvaluate {
 				from components.release
 				groupId = 'com.github.evilbunny2008'
 				artifactId = 'ColourPicker'
-				version = '2.0.24'
+				version = '2.0.25'
 			}
 		}
 	}
 }
 
 android {
-	compileSdk = 36
+	compileSdk = 37
 	defaultConfig {
 		minSdk = 24
 		targetSdk = 37
-		version = '2.0.24'
-		versionCode = 2000024
+		version = '2.0.25'
+		versionCode = 2000025
 	}
 
 	buildTypes {
@@ -57,7 +57,7 @@ android {
 
 dependencies {
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
-	implementation('com.google.android.material:material:1.13.0')
+	implementation('com.google.android.material:material:1.14.0')
 }
 
 tasks.withType(Test).configureEach {
