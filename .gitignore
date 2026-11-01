@@ -45,6 +45,7 @@ captures/
 .idea/libraries
 .idea/caches/
 .idea/inspectionProfiles/
+.idea/appInsightsSettings.xml
 
 # Keystore files
 *.jks
